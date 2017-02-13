@@ -1,9 +1,11 @@
 package test;
 
+import model.ClientCore;
+
 public class MainClient {
 	
 	public static void main(String[] args) {
-		System.out.println("hello world");
+		new ClientCore();
 	}
 
 }
