@@ -1,10 +1,16 @@
 package server;
 
+import java.io.IOException;
+
 public class ServerMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		int port = 1234;
+		try{
+			ServerCore serverCore = new ServerCore(port);
+		}catch (IOException e){
+			System.out.println("error during initialisation" + e.toString());
+		}
 	}
 
 }
