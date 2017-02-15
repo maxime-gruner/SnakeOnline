@@ -21,7 +21,7 @@ public class TextPlayerLogger implements IPlayerLogger{
 	}
 
 	@Override
-	public void snakeJoinsGame(String name) {
+	public void playerJoinsGame(String name) {
 		System.out.println("New snake launch by " + name);
 		
 	}

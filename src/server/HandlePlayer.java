@@ -3,11 +3,12 @@ package server;
 import java.io.IOException;
 import java.net.Socket;
 
-public class HandlePlayer implements Runnable {
+public class HandlePlayer implements Runnable, ServerProtocol {
 	private final Socket playerSocket;
 	private PlayerOutput pOut;
 	private PlayerInput pIn;
-	private String playerName = "";
+	private String name = "";
+	private Snake snake;
 	private IPlayerLogger logger = null;
 	private boolean stop = false;
 	
@@ -41,8 +42,22 @@ public class HandlePlayer implements Runnable {
 				playerSocket.close();
 			} catch(IOException e){ e.printStackTrace();}
 			// retirer cleint de la liste quand elle sera faite,
-			logger.playerDisconnected(playerSocket.toString(), playerName);
+			logger.playerDisconnected(playerSocket.toString(), name);
 		}
+	}
+
+	@Override
+	public void onReceiveName(String name) {
+		String newName = name;
+		if(SnakeModel.existUserName(name)){
+			// SEND NAME BAD
+		}else{
+			if(state == PlayerState.ST_INIT){
+				SnakeModel.addPlayer(newName, this);
+				logger.playerJoinsGame(newName);
+			}
+		}
+		
 	}
 	
 }

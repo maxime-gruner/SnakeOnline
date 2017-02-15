@@ -26,7 +26,7 @@ public class ClientCore extends JFrame{
 	private  Socket sock;
 	private boolean connected = false;
 	private String connectAdress = "127.0.0.1";
-	private String name ;
+	private String name="" ;
 	private ClientHandleConnection connection;
 	
 	private JPanel startPanel;
@@ -52,7 +52,6 @@ public class ClientCore extends JFrame{
 		}
 		connected = true;
 		connection.start();
-		
 	}
 	
 	
@@ -66,7 +65,7 @@ public class ClientCore extends JFrame{
 		
 		
 		acceptButton.addActionListener( l->{
-			name = nameField.getText();
+			this.name = nameField.getText();
 			setContentPane(gameBoard);
 			validate();
 			connect();
@@ -85,6 +84,9 @@ public class ClientCore extends JFrame{
 		setVisible(true);
 	}
 	
+	public String getName(){
+		return this.name;
+	}
 	
 
 }
