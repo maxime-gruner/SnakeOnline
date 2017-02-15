@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
-public class PlayerOutput  implements PlayerProtocol{
+public class ClientOutput  implements PlayerProtocol{
 	
 	PrintWriter os;
 	
-	public PlayerOutput(OutputStream out) throws IOException{
+	public ClientOutput(OutputStream out) throws IOException{
 		this.os = new PrintWriter(out,true);
 	}
 

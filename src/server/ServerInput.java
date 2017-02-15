@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class PlayerInput {
+public class ServerInput {
 	HandlePlayer handler;
 	InputStream in;
 	
-	public PlayerInput( InputStream in, HandlePlayer handler) throws IOException{
+	public ServerInput( InputStream in, HandlePlayer handler) throws IOException{
 		this.in = in;
 		this.handler = handler;
 	}

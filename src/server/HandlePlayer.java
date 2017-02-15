@@ -5,8 +5,8 @@ import java.net.Socket;
 
 public class HandlePlayer implements Runnable, ServerProtocol {
 	private final Socket playerSocket;
-	private PlayerOutput pOut;
-	private PlayerInput pIn;
+	private ServerOutput pOut;
+	private ServerInput pIn;
 	private String name = "";
 	private Snake snake;
 	private IPlayerLogger logger = null;
@@ -23,8 +23,8 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	@Override
 	public void run() {
 		try(Socket s1 = playerSocket){
-			pOut = new PlayerOutput(s1.getOutputStream());
-			pIn  = new PlayerInput(s1.getInputStream(), this);
+			pOut = new ServerOutput(s1.getOutputStream());
+			pIn  = new ServerInput(s1.getInputStream(), this);
 			pIn.doRun();
 		}catch (IOException e){
 			if(!stop){

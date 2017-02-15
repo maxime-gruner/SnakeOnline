@@ -5,13 +5,12 @@ import java.net.Socket;
 
 
 import model.ClientCore;
-import controller.PlayerOutput;
 
 public class ClientHandleConnection extends Thread implements Runnable, ClientProtocol  {
 	
 	
 	Socket sock = null;
-	PlayerOutput pOut;
+	ClientOutput cOut;
 	private ClientCore c;
 	private boolean stop;
 	
@@ -26,7 +25,7 @@ public class ClientHandleConnection extends Thread implements Runnable, ClientPr
 	public void run() {
 		try(Socket s1 = sock){
 			//input
-			pOut = new PlayerOutput(s1.getOutputStream());
+			cOut = new ClientOutput(s1.getOutputStream());
 			sendName(c.getName());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -48,7 +47,7 @@ public class ClientHandleConnection extends Thread implements Runnable, ClientPr
 
 	@Override
 	public void sendName(String name) {
-		pOut.sendName(name);
+		cOut.sendName(name);
 	}
 
 }
