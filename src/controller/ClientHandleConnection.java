@@ -2,31 +2,37 @@ package controller;
 
 import java.io.IOException;
 import java.net.Socket;
-
+import java.util.Collection;
 
 import model.ClientCore;
 
 public class ClientHandleConnection extends Thread implements Runnable, ClientProtocol  {
 	
 	
-	Socket sock = null;
-	ClientOutput cOut;
+	private Socket sock = null;
+	private ClientOutput cOut;
+	private ClientInput cIn;
 	private ClientCore c;
-	private boolean stop;
+	private boolean stop = false;
 	
 	public ClientHandleConnection(Socket s,ClientCore c) {
 		this.sock= s;
 		this.c = c;
+		try {
+			cOut = new ClientOutput(sock.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		//output
+		
 	}
 	
 	@Override
 	public void run() {
 		try(Socket s1 = sock){
-			//input
-			cOut = new ClientOutput(s1.getOutputStream());
-			sendName(c.getName());
+			cIn = new ClientInput(s1.getInputStream(), this);
+			cIn.doRun();
 		} catch (IOException e) {
 			e.printStackTrace();
 			finish();
@@ -49,5 +55,30 @@ public class ClientHandleConnection extends Thread implements Runnable, ClientPr
 	public void sendName(String name) {
 		cOut.sendName(name);
 	}
+
+	@Override
+	public void nameOK() {
+		c.acceptName();
+		
+	}
+
+	@Override
+	public void nameBad() {
+		finish();
+		
+	}
+
+	@Override
+	public void askPList() {
+		cOut.askPList();
+		
+	}
+
+	@Override
+	public void sendPlist(Collection<String> pList) {
+		c.fillUserList(pList);
+	}
+	
+	
 
 }

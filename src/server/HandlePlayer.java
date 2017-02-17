@@ -50,8 +50,9 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	public void onReceiveName(String name) {
 		String newName = name;
 		if(SnakeModel.existUserName(name)){
-			// SEND NAME BAD
+			nameBad();
 		}else{
+			nameOK();
 			if(state == PlayerState.ST_INIT){
 				SnakeModel.addPlayer(newName, this);
 				logger.playerJoinsGame(newName);
@@ -59,5 +60,27 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 		}
 		
 	}
+
+	@Override
+	public void nameOK() {
+		pOut.nameOK();
+		
+	}
+
+	@Override
+	public void nameBad() {
+		pOut.nameBad();
+		
+	}
+
+	
+	public void aPList() {
+		pOut.sendPList(SnakeModel.getPlayersName());
+		
+	}
+	public void pListChanged(){
+		pOut.sendPList(SnakeModel.getPlayersName());
+	}
+
 	
 }

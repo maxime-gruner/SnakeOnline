@@ -5,10 +5,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import controller.ClientHandleConnection;
@@ -33,6 +36,8 @@ public class ClientCore extends JFrame{
 	private JPanel gameBoard;
 	private JTextField nameField;
 	private JButton acceptButton;
+	private JScrollPane playerListPane;
+	private JList<String> playerList;
 	
 	public ClientCore() {
 		port = 1234;
@@ -52,6 +57,8 @@ public class ClientCore extends JFrame{
 		}
 		connected = true;
 		connection.start();
+		
+		connection.sendName(name);
 	}
 	
 	
@@ -59,6 +66,11 @@ public class ClientCore extends JFrame{
 		
 		startPanel = new JPanel(new FlowLayout() );
 		gameBoard = new  JPanel(new BorderLayout() );
+		
+		
+		playerList = new JList<>();
+		playerListPane = new JScrollPane(playerList);
+		
 		
 		nameField = new JTextField(5);
 		acceptButton = new JButton("Connect");
@@ -75,6 +87,10 @@ public class ClientCore extends JFrame{
 		startPanel.add(nameField);
 		startPanel.add(acceptButton);
 		
+		playerListPane.setPreferredSize(new Dimension(WIDTH/7, HEIGHT/6));
+		gameBoard.add(playerListPane,BorderLayout.EAST);
+		
+		
 		
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setTitle("Snake");
@@ -86,6 +102,19 @@ public class ClientCore extends JFrame{
 	
 	public String getName(){
 		return this.name;
+	}
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	
+	public void fillUserList(Collection<String> plist){
+		playerList.setListData(plist.toArray(new String[0]));
+	}
+
+	public void acceptName() {
+		connection.askPList();
+		
 	}
 	
 

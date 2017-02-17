@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
-public class ClientOutput  implements PlayerProtocol{
+public class ClientOutput  implements ClientProtocol{
 	
 	PrintWriter os;
 	
@@ -18,5 +18,14 @@ public class ClientOutput  implements PlayerProtocol{
 		os.println(name);
 		
 	}
+
+	@Override
+	public void askPList() {
+		os.println("APLIST");
+	}
+
+	
+	
+	
 
 }

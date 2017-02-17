@@ -1,5 +1,6 @@
 package server;
 
+import java.util.Set;
 import java.util.TreeMap;
 
 public class SnakeModel {
@@ -11,6 +12,14 @@ public class SnakeModel {
 	
 	public static synchronized void addPlayer (String name, HandlePlayer player){
 		playerList.put(name, player);
+		notifyNewPlayer();
 	}
 	
+	public static synchronized Set<String> getPlayersName(){
+		return playerList.keySet();
+	}
+	
+	public static void notifyNewPlayer(){
+		playerList.values().forEach(c -> c.pListChanged());
+	}
 }

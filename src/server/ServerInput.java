@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import controller.MyProtocolException;
+
 public class ServerInput {
 	HandlePlayer handler;
 	InputStream in;
@@ -24,12 +26,13 @@ public class ServerInput {
 					name = is.readLine();
 					handler.onReceiveName(name);
 					break;
+				case "APLIST":
+					handler.aPList();
+					break;
 				default :
-					System.out.println("invalid input");
+					throw new MyProtocolException("Ivalid input on server : " + line);
 				}
 			}
-		}catch (NullPointerException e){
-			System.out.println("error input stream " + e.toString());
 		}
 	}
 }

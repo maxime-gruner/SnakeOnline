@@ -1,5 +1,10 @@
 package server;
 
+import java.util.Collection;
+
 public interface ServerProtocol {
-	public void onReceiveName(String name);
+	default public void onReceiveName(String name){}
+	public void nameOK();
+	public void nameBad();
+	default public void sendPList(Collection<String> pList){}
 }
