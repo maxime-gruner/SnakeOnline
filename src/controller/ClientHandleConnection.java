@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.util.Collection;
 
 import model.ClientCore;
+import server.Point;
 
 public class ClientHandleConnection extends Thread implements Runnable, ClientProtocol  {
 	
@@ -77,6 +78,12 @@ public class ClientHandleConnection extends Thread implements Runnable, ClientPr
 	@Override
 	public void sendPlist(Collection<String> pList) {
 		c.fillUserList(pList);
+	}
+
+	@Override
+	public void initSnake(Collection<Point> bodyP) {
+		c.drawPoint(bodyP);
+		
 	}
 	
 	

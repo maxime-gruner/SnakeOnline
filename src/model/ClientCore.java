@@ -15,6 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import controller.ClientHandleConnection;
+import server.Point;
+import server.SnakeModel;
 
 public class ClientCore extends JFrame{
 	
@@ -24,6 +26,7 @@ public class ClientCore extends JFrame{
 	private static final long serialVersionUID = 1L;
 	static int WIDTH = 800;
 	static int HEIGHT = 800;
+	static int SCALE = 4;
 	
 	private int port = 1234;
 	private  Socket sock;
@@ -33,7 +36,8 @@ public class ClientCore extends JFrame{
 	private ClientHandleConnection connection;
 	
 	private JPanel startPanel;
-	private JPanel gameBoard;
+	private JPanel screen;
+	private GameBoard gameBoard;
 	private JTextField nameField;
 	private JButton acceptButton;
 	private JScrollPane playerListPane;
@@ -65,7 +69,8 @@ public class ClientCore extends JFrame{
 	private void initComponent(){
 		
 		startPanel = new JPanel(new FlowLayout() );
-		gameBoard = new  JPanel(new BorderLayout() );
+		screen = new JPanel(new BorderLayout() );
+		gameBoard = new GameBoard(200,200,SCALE);
 		
 		
 		playerList = new JList<>();
@@ -78,7 +83,7 @@ public class ClientCore extends JFrame{
 		
 		acceptButton.addActionListener( l->{
 			this.name = nameField.getText();
-			setContentPane(gameBoard);
+			setContentPane(screen);
 			validate();
 			connect();
 			
@@ -87,12 +92,14 @@ public class ClientCore extends JFrame{
 		startPanel.add(nameField);
 		startPanel.add(acceptButton);
 		
-		playerListPane.setPreferredSize(new Dimension(WIDTH/7, HEIGHT/6));
-		gameBoard.add(playerListPane,BorderLayout.EAST);
+		
+		playerListPane.setPreferredSize(new Dimension(150, 50));
+		screen.add(gameBoard,BorderLayout.CENTER);
+		screen.add(playerListPane,BorderLayout.EAST);
 		
 		
 		
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		setPreferredSize(new Dimension(WIDTH+150, HEIGHT));
 		setTitle("Snake");
 		setContentPane(startPanel);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,6 +121,11 @@ public class ClientCore extends JFrame{
 
 	public void acceptName() {
 		connection.askPList();
+		
+	}
+
+	public void drawPoint(Collection<Point> bodyP) {
+		gameBoard.drawPoints(bodyP);
 		
 	}
 	

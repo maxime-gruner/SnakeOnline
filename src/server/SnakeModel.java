@@ -1,9 +1,14 @@
 package server;
 
+import java.util.Collection;
 import java.util.Set;
 import java.util.TreeMap;
 
 public class SnakeModel {
+	static int WIDTH = 200;
+	static int HEIGHT = 200;
+	
+	
 	private static final TreeMap<String, HandlePlayer> playerList = new TreeMap<>();
 	
 	public static synchronized boolean existUserName (String name){
@@ -21,5 +26,9 @@ public class SnakeModel {
 	
 	public static void notifyNewPlayer(){
 		playerList.values().forEach(c -> c.pListChanged());
+	}
+
+	public static synchronized void notifyNewSnake(Collection<Point> body) {
+		playerList.values().forEach( c -> c.createSnake(body));
 	}
 }

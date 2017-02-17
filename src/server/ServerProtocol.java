@@ -7,4 +7,5 @@ public interface ServerProtocol {
 	public void nameOK();
 	public void nameBad();
 	default public void sendPList(Collection<String> pList){}
+	public void createSnake(Collection<Point> body);
 }

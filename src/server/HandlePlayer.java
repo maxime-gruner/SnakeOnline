@@ -2,6 +2,7 @@ package server;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Collection;
 
 public class HandlePlayer implements Runnable, ServerProtocol {
 	private final Socket playerSocket;
@@ -78,9 +79,23 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 		pOut.sendPList(SnakeModel.getPlayersName());
 		
 	}
+	
 	public void pListChanged(){
 		pOut.sendPList(SnakeModel.getPlayersName());
 	}
+	
+	public void newSnake(){
+		snake = new Snake();
+		SnakeModel.notifyNewSnake(snake.getBody());
+	}
+
+	@Override
+	public void createSnake(Collection<Point> body) {
+		pOut.createSnake(body);
+		
+	}
+
+	
 
 	
 }

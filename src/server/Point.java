@@ -1,6 +1,15 @@
 package server;
 
+import java.util.Random;
+
 public class Point {
+	@Override
+	public String toString() {
+		return "Point [abs=" + abs + ", ord=" + ord + "]";
+	}
+
+	private static Random rnd = new Random();
+	
 	private int abs;
 	private int ord;
 	
@@ -23,5 +32,11 @@ public class Point {
 
 	public void setOrd(int ord) {
 		this.ord = ord;
+	}
+	
+	public static Point randomCoord(){
+		int x = rnd.nextInt(SnakeModel.WIDTH);
+		int y = rnd.nextInt(SnakeModel.HEIGHT);
+		return new Point(x, y);
 	}
 }

@@ -21,6 +21,7 @@ public class ServerInput {
 		try(BufferedReader is = new BufferedReader(new InputStreamReader(in))){
 			while(true){
 				String line = is.readLine();
+				
 				switch (line){
 				case "NAME":
 					name = is.readLine();
@@ -28,6 +29,7 @@ public class ServerInput {
 					break;
 				case "APLIST":
 					handler.aPList();
+					handler.newSnake();
 					break;
 				default :
 					throw new MyProtocolException("Ivalid input on server : " + line);

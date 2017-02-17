@@ -33,6 +33,19 @@ public class ServerOutput implements ServerProtocol {
 		os.println(".");
 		
 	}
+
+
+	@Override
+	public void createSnake(Collection<Point> body) {
+		os.println("SNAKE INIT");
+		for (Point point : body) {
+			os.println(point.getAbs());
+			os.println(point.getOrd());
+		}
+		
+		os.println(".");
+		
+	}
 	
 	
 }
