@@ -74,26 +74,42 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 		
 	}
 
-	
+	@Override
 	public void aPList() {
 		pOut.sendPList(SnakeModel.getPlayersName());
 		
 	}
 	
+	@Override
 	public void pListChanged(){
 		pOut.sendPList(SnakeModel.getPlayersName());
 	}
 	
+	@Override
 	public void newSnake(){
 		snake = new Snake();
+		
+		for (HandlePlayer handle : SnakeModel.getAllSnake()) {
+			pOut.sendSnake(handle.name, handle.getBodySnake());
+		}
+
 		SnakeModel.notifyNewSnake(snake.getBody());
+		
 	}
 
 	@Override
-	public void createSnake(Collection<Point> body) {
+	public void drawSnake(Collection<Point> body) {
 		pOut.createSnake(body);
 		
 	}
+	
+	
+	public Collection<Point> getBodySnake(){
+		return snake.getBody();
+	}
+	
+	
+	
 
 	
 

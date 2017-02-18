@@ -24,11 +24,19 @@ public class SnakeModel {
 		return playerList.keySet();
 	}
 	
-	public static void notifyNewPlayer(){
+	public static synchronized void notifyNewPlayer(){
 		playerList.values().forEach(c -> c.pListChanged());
 	}
 
 	public static synchronized void notifyNewSnake(Collection<Point> body) {
-		playerList.values().forEach( c -> c.createSnake(body));
+		playerList.values().forEach( c -> c.drawSnake(body));
 	}
+	
+	public static synchronized Collection<HandlePlayer> getAllSnake(){
+		return playerList.values();
+	}
+	
+
 }
+	
+	

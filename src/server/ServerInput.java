@@ -21,7 +21,7 @@ public class ServerInput {
 		try(BufferedReader is = new BufferedReader(new InputStreamReader(in))){
 			while(true){
 				String line = is.readLine();
-				
+				System.out.println("Serv received : " + line);
 				switch (line){
 				case "NAME":
 					name = is.readLine();

@@ -22,6 +22,9 @@ public class ClientInput {
 	public void doRun() throws IOException{
 		ArrayList<String> pList;
 		ArrayList<Point> bodyP;
+		String name;
+		String abs;
+		String ord;
 		
 		try(BufferedReader is = new BufferedReader(new InputStreamReader(in))){
 			while(!stop){
@@ -42,20 +45,35 @@ public class ClientInput {
 					}
 					handler.sendPlist(pList);
 					break;
-				case "SNAKE INIT":
+				case "SNAKE NEW":
 					bodyP = new ArrayList<>();
-					String abs;
-					String ord;
+					
 					while(!(abs = is.readLine()).equals(".")){
 						ord = is.readLine();
 						
 						Point p = new Point(Integer.valueOf(abs), Integer.valueOf(ord));
 						bodyP.add(p);
-						
+						System.out.println(p);
 					}
 					
 					handler.initSnake(bodyP);
 					break;
+				case "SNAKE INIT":
+					bodyP = new ArrayList<>();
+					name = is.readLine();
+					
+					while(!(abs = is.readLine()).equals(".")){
+						ord = is.readLine();
+						
+						Point p = new Point(Integer.valueOf(abs), Integer.valueOf(ord));
+						bodyP.add(p);
+						System.out.println(p);
+					}
+					
+					handler.initSnake(bodyP);
+					break;
+				
+				
 				default:
 					throw new MyProtocolException("Invalid input on client: " + line);
 				}

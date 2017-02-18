@@ -24,8 +24,6 @@ public class Snake {
 			body.add(p);
 		}
 		
-		SnakeModel.notifyNewSnake(body);
-		
 	}
 	
 	

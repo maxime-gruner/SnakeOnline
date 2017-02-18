@@ -27,17 +27,16 @@ public class ServerOutput implements ServerProtocol {
 
 
 	@Override
-	public void sendPList(Collection<String> pList) {
+	public void sendPList(Collection<String> pList){
 		os.println("PLIST");
 		pList.forEach(os::println);
 		os.println(".");
-		
 	}
 
 
 	@Override
-	public void createSnake(Collection<Point> body) {
-		os.println("SNAKE INIT");
+	public void createSnake(Collection<Point> body){
+		os.println("SNAKE NEW");
 		for (Point point : body) {
 			os.println(point.getAbs());
 			os.println(point.getOrd());
@@ -46,6 +45,24 @@ public class ServerOutput implements ServerProtocol {
 		os.println(".");
 		
 	}
+
+	@Override
+	public void sendSnake(String name,Collection<Point> body) {
+		os.println("SNAKE INIT");
+		os.println(name);
+		for (Point point : body) {
+			os.println(point.getAbs());
+			os.println(point.getOrd());
+		}
+		
+		os.println(".");
+		
+	}
+
+
+	
+
+
 	
 	
 }
