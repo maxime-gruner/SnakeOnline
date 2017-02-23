@@ -66,6 +66,7 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	public void startPlaying(){
 		while(play){
 			try {
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				
 			}
@@ -77,7 +78,6 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	@Override
 	public void moveSnake() {
 		pOut.moveDone(name, snake.getHead(), snake.getTail());
-		snake.move();
 		
 	}
 
