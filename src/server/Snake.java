@@ -50,10 +50,10 @@ public class Snake {
 	}
 	
 	public void move() {
-		Point head = getHead(); 
+		Point head = getHead();
 		Point next = new Point(head.getAbs() + direction.x, head.getOrd() + direction.y);
-		body.remove(0);
 		body.add(next);
+		body.remove(0);
 	}
 	
 

@@ -93,6 +93,8 @@ public class ClientHandleConnection extends Thread implements Runnable, ClientPr
 
 	@Override
 	public void drawMove(Point head, Point tail) {
+		System.out.println( "head : " + head.toString());
+		System.out.println( "tail : " + tail.toString());
 		c.drawHead(head);
 		c.drawTail(tail);
 	}

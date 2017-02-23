@@ -21,6 +21,7 @@ public class ServerCore extends Thread {
 	public void run() {
 		try(ServerSocket serverSocket = new ServerSocket(port)){
 			serverSocket.setSoTimeout(1000);
+			new Thread(new Tickle()).start();
 			while(!stop){
 				try{
 					Socket playerSocket = serverSocket.accept();

@@ -63,22 +63,18 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 		
 	}
 	
-	public void startPlaying(){
-		while(play){
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				
-			}
-			SnakeModel.moveSnake(name);
-		}
-	}
 	
 	
 	@Override
 	public void moveSnake() {
-		pOut.moveDone(name, snake.getHead(), snake.getTail());
+		snake.move();
+		SnakeModel.notifyNewMove(snake.getHead(), snake.getTail());
 		
+	}
+
+	@Override
+	public void sendMove(Point head, Point tail) {
+		pOut.sendMove(head, tail);
 	}
 
 	@Override
@@ -113,7 +109,6 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 
 		SnakeModel.notifyNewSnake(snake.getBody());
 
-		startPlaying();
 	}
 
 	@Override

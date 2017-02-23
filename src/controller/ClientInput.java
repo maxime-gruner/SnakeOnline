@@ -73,12 +73,11 @@ public class ClientInput {
 					handler.initSnake(bodyP);
 					break;
 				case "MOVE DONE":
-					name = is.readLine();
 					abs=is.readLine();
 					ord=is.readLine();
 					abs2=is.readLine();
 					ord2=is.readLine();
-					handler.drawMove(new Point(Integer.valueOf(abs), Integer.valueOf(ord)),new Point(Integer.valueOf(abs), Integer.valueOf(ord)));
+					handler.drawMove(new Point(Integer.valueOf(abs), Integer.valueOf(ord)),new Point(Integer.valueOf(abs2), Integer.valueOf(ord2)));
 					break;
 				
 				default:
