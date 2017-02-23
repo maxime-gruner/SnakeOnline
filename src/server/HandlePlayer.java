@@ -11,7 +11,7 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	private String name = "";
 	private Snake snake;
 	private IPlayerLogger logger = null;
-	private boolean stop = false;
+	private boolean stop = false, play=true;
 	
 	private enum PlayerState{ ST_INIT, ST_LOGGED }
 	private PlayerState state = PlayerState.ST_INIT;
@@ -55,17 +55,35 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 		}else{
 			nameOK();
 			if(state == PlayerState.ST_INIT){
+				this.name=name;
 				SnakeModel.addPlayer(newName, this);
 				logger.playerJoinsGame(newName);
 			}
 		}
 		
 	}
+	
+	public void startPlaying(){
+		while(play){
+			try {
+			} catch (InterruptedException e) {
+				
+			}
+			SnakeModel.moveSnake(name);
+		}
+	}
+	
+	
+	@Override
+	public void moveSnake() {
+		pOut.moveDone(name, snake.getHead(), snake.getTail());
+		snake.move();
+		
+	}
 
 	@Override
 	public void nameOK() {
 		pOut.nameOK();
-		
 	}
 
 	@Override
@@ -94,7 +112,8 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 		}
 
 		SnakeModel.notifyNewSnake(snake.getBody());
-		
+
+		startPlaying();
 	}
 
 	@Override
@@ -104,6 +123,29 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	}
 	
 	
+	@Override
+	public void changeDir(String dir) {
+		Direction d = null;
+		switch (dir){
+			case "Z":
+				d=Direction.Up;
+				break;
+			case "S":
+				d=Direction.Down;
+				break;
+			case "Q":
+				d=Direction.Left;
+				break;
+			case "D":
+				d=Direction.Right;
+				break;
+			default:
+				logger.systemMessage("invalid Key :" +dir +" -> no action");
+		}
+		snake.setDirection(d);
+		logger.playerTurn(name, dir);
+	}
+
 	public Collection<Point> getBodySnake(){
 		return snake.getBody();
 	}

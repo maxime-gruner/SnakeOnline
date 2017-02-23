@@ -60,6 +60,17 @@ public class ServerOutput implements ServerProtocol {
 	}
 
 
+	@Override
+	public void moveDone(String name, Point head, Point tail) {
+		os.println("MOVE DONE");
+		os.println(name);
+		os.println(head.getAbs());
+		os.println(head.getOrd());
+		os.println(tail.getAbs());
+		os.println(tail.getOrd());
+	}
+
+
 	
 
 

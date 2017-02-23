@@ -33,7 +33,21 @@ public class GameBoard extends JComponent {
 		repaint();
 		
 	}
-
+	
+	public void drawHead(Point p){
+		Graphics g = img.getGraphics();
+		g.setColor(Color.WHITE);
+		g.fillRect(p.getAbs()*scale, p.getOrd()*scale, scale, scale);
+		repaint();
+	}
+	
+	public void drawTail(Point t){
+		Graphics g = img.getGraphics();
+		g.setColor(Color.BLACK);
+		g.fillRect(t.getAbs()*scale, t.getOrd()*scale, scale, scale);
+		repaint();
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

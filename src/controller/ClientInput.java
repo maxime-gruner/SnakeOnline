@@ -23,8 +23,8 @@ public class ClientInput {
 		ArrayList<String> pList;
 		ArrayList<Point> bodyP;
 		String name;
-		String abs;
-		String ord;
+		String abs,abs2;
+		String ord,ord2;
 		
 		try(BufferedReader is = new BufferedReader(new InputStreamReader(in))){
 			while(!stop){
@@ -72,7 +72,14 @@ public class ClientInput {
 					
 					handler.initSnake(bodyP);
 					break;
-				
+				case "MOVE DONE":
+					name = is.readLine();
+					abs=is.readLine();
+					ord=is.readLine();
+					abs2=is.readLine();
+					ord2=is.readLine();
+					handler.drawMove(new Point(Integer.valueOf(abs), Integer.valueOf(ord)),new Point(Integer.valueOf(abs), Integer.valueOf(ord)));
+					break;
 				
 				default:
 					throw new MyProtocolException("Invalid input on client: " + line);

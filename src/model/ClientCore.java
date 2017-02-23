@@ -1,8 +1,11 @@
 package model;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Collection;
@@ -68,6 +71,7 @@ public class ClientCore extends JFrame{
 	
 	private void initComponent(){
 		
+		
 		startPanel = new JPanel(new FlowLayout() );
 		screen = new JPanel(new BorderLayout() );
 		gameBoard = new GameBoard(200,200,SCALE);
@@ -80,10 +84,34 @@ public class ClientCore extends JFrame{
 		nameField = new JTextField(5);
 		acceptButton = new JButton("Connect");
 		
+		gameBoard.addKeyListener( 
+				new KeyListener() {
+					
+					@Override
+					public void keyTyped(KeyEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void keyReleased(KeyEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void keyPressed(KeyEvent e) {
+						// TODO Auto-generated method stub
+						System.out.println("llolilol");
+						connection.sendDir("" + (char) e.getKeyCode());
+					}
+				}
+		);
 		
 		acceptButton.addActionListener( l->{
 			this.name = nameField.getText();
 			setContentPane(screen);
+			gameBoard.requestFocusInWindow();
 			validate();
 			connect();
 			
@@ -96,9 +124,7 @@ public class ClientCore extends JFrame{
 		playerListPane.setPreferredSize(new Dimension(150, 50));
 		screen.add(gameBoard,BorderLayout.CENTER);
 		screen.add(playerListPane,BorderLayout.EAST);
-		
-		
-		
+			
 		setPreferredSize(new Dimension(WIDTH+150, HEIGHT));
 		setTitle("Snake");
 		setContentPane(startPanel);
@@ -124,10 +150,17 @@ public class ClientCore extends JFrame{
 		
 	}
 
-	public void drawPoint(Collection<Point> bodyP) {
+	public void drawBody(Collection<Point> bodyP) {
 		gameBoard.drawPoints(bodyP);
 		
 	}
 	
-
+	public void drawHead(Point h){
+		gameBoard.drawHead(h);
+	}
+	
+	public void drawTail(Point h){
+		gameBoard.drawTail(h);
+	}
+	
 }

@@ -17,7 +17,7 @@ public class ServerInput {
 	}
 	
 	public void doRun() throws IOException{
-		String name;
+		String name, dir;
 		try(BufferedReader is = new BufferedReader(new InputStreamReader(in))){
 			while(true){
 				String line = is.readLine();
@@ -30,6 +30,10 @@ public class ServerInput {
 				case "APLIST":
 					handler.aPList();
 					handler.newSnake();
+					break;
+				case "CHANGE DIR":
+					dir=is.readLine();
+					handler.changeDir(dir);
 					break;
 				default :
 					throw new MyProtocolException("Ivalid input on server : " + line);

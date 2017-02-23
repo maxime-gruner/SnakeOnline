@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Collection;
 
+import server.Direction;
 import server.Point;
 
 public interface ClientProtocol {
@@ -11,4 +12,6 @@ public interface ClientProtocol {
 	default public void askPList(){};
 	default public void sendPlist(Collection<String> pList){};
 	default public void initSnake(Collection<Point> bodyP){}	 
+	default public void sendDir(String dir){}
+	default void drawMove(Point head, Point tail){}
 }

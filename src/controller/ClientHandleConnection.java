@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Collection;
@@ -51,7 +52,7 @@ public class ClientHandleConnection extends Thread implements Runnable, ClientPr
 			}
 		}
 	}
-
+	
 	@Override
 	public void sendName(String name) {
 		cOut.sendName(name);
@@ -60,7 +61,6 @@ public class ClientHandleConnection extends Thread implements Runnable, ClientPr
 	@Override
 	public void nameOK() {
 		c.acceptName();
-		
 	}
 
 	@Override
@@ -82,9 +82,22 @@ public class ClientHandleConnection extends Thread implements Runnable, ClientPr
 
 	@Override
 	public void initSnake(Collection<Point> bodyP) {
-		c.drawPoint(bodyP);
+		c.drawBody(bodyP);
 		
 	}
+
+	@Override
+	public void sendDir(String dir) {
+		cOut.sendDir(dir);
+	}
+
+	@Override
+	public void drawMove(Point head, Point tail) {
+		c.drawHead(head);
+		c.drawTail(tail);
+	}
+
+	
 	
 	
 

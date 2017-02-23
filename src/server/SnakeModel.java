@@ -36,7 +36,9 @@ public class SnakeModel {
 		return playerList.values();
 	}
 	
-
+	public static synchronized void moveSnake( String name){
+		playerList.get(name).moveSnake();
+	}
 }
 	
 	

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 
+
 public class Snake {
 
 	private final int INITSIZE = 3;
@@ -15,7 +16,7 @@ public class Snake {
 		
 	
 	public Snake(){
-		direction = Direction.Right;
+		direction = Direction.Down;
 		Point start;
 		start = Point.randomCoord();
 		
@@ -40,6 +41,20 @@ public class Snake {
 		return body;
 	}
 	
+	public Point getHead(){
+		return this.body.get(body.size()-1);
+	}
+	
+	public Point getTail(){
+		return this.body.get(0);
+	}
+	
+	public void move() {
+		Point head = getHead(); 
+		Point next = new Point(head.getAbs() + direction.x, head.getOrd() + direction.y);
+		body.remove(0);
+		body.add(next);
+	}
 	
 
 	

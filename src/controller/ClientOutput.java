@@ -27,6 +27,12 @@ public class ClientOutput  implements ClientProtocol{
 		os.println("APLIST");
 	}
 
+	@Override
+	public void sendDir(String dir) {
+		os.println("CHANGE DIR");
+		os.println(dir);
+	}
+
 	
 
 	

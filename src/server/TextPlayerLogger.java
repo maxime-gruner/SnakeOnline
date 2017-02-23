@@ -3,6 +3,11 @@ package server;
 public class TextPlayerLogger implements IPlayerLogger{
 
 	@Override
+	public void playerTurn(String name, String dir) {
+		System.out.println(name + " turned " + dir);
+	}
+
+	@Override
 	public void playerConnected(String ip) {
 		System.out.println("Connecting to ..." + ip );
 		
