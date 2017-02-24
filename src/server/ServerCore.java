@@ -21,6 +21,7 @@ public class ServerCore extends Thread {
 	public void run() {
 		try(ServerSocket serverSocket = new ServerSocket(port)){
 			serverSocket.setSoTimeout(1000);
+			SnakeModel.initMap();
 			new Thread(new Tickle()).start();
 			while(!stop){
 				try{
@@ -33,6 +34,7 @@ public class ServerCore extends Thread {
 		} catch (IOException e) {
 			System.out.println("could not bind port " + port);
 		}
+		
 	}
 	
 	public synchronized void finish(){

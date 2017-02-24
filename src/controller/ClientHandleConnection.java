@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -103,6 +102,11 @@ public class ClientHandleConnection extends Thread implements Runnable, ClientPr
 	@Override
 	public void eraseSnake(ArrayList<Point> bodyP) {
 		c.eraseBody(bodyP);
+	}
+	
+	@Override
+	public void die() {
+		finish(); // a changer
 	}
 
 	

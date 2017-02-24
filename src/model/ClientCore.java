@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
@@ -20,7 +19,6 @@ import javax.swing.JTextField;
 
 import controller.ClientHandleConnection;
 import server.Point;
-import server.SnakeModel;
 
 public class ClientCore extends JFrame{
 	
@@ -127,6 +125,7 @@ public class ClientCore extends JFrame{
 		screen.add(gameBoard,BorderLayout.CENTER);
 		screen.add(playerListPane,BorderLayout.EAST);
 			
+		setResizable(false);
 		setPreferredSize(new Dimension(WIDTH+150, HEIGHT));
 		setTitle("Snake");
 		setContentPane(startPanel);

@@ -12,6 +12,9 @@ import javax.swing.JComponent;
 import server.Point;
 
 public class GameBoard extends JComponent {
+		
+	private static final long serialVersionUID = 1L;
+
 		BufferedImage img;
 
 	private int scale;

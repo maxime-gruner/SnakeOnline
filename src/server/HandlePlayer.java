@@ -67,6 +67,12 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	
 	@Override
 	public void moveSnake() {
+		if(SnakeModel.checkCollision(snake)){
+			snake.die();
+			pOut.snakeDie();
+			return;
+		}
+		
 		snake.move();
 		SnakeModel.notifyNewMove(snake.getHead(), snake.getTail());
 		snake.removeTail();
@@ -103,6 +109,8 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	@Override
 	public void newSnake(){
 		snake = new Snake();
+		
+		SnakeModel.spawnSnake(snake.getBody());
 		
 		for (HandlePlayer handle : SnakeModel.getAllSnake()) {
 			pOut.sendSnake(handle.name, handle.getBodySnake());
@@ -150,6 +158,7 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 		return snake.getBody();
 	}
 
+	@Override
 	public void playerQuit(HandlePlayer handlePlayer) {
 		pOut.cleanSnake(handlePlayer.getBodySnake());
 	}

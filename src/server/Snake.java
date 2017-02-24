@@ -33,6 +33,16 @@ public class Snake {
 	}
 	
 	public void setDirection(Direction direction){
+		if(this.direction == Direction.Right && direction == Direction.Left){
+			return;
+		}if(this.direction == Direction.Left && direction == Direction.Right){
+			return;
+		}
+		if(this.direction == Direction.Down && direction == Direction.Up){
+			return;
+		}if(this.direction == Direction.Up && direction == Direction.Down){
+			return;
+		}
 		this.direction = direction;
 		
 	}
@@ -56,8 +66,17 @@ public class Snake {
 		
 	}
 	
+	public Point getAhead(){
+		return new Point(getHead().getAbs()+direction.x,getHead().getOrd()+direction.y);
+	}
+	
 	public void removeTail(){
 		body.remove(0);
+	}
+
+
+	public void die() { //ne sers a rien ?
+		alive = false;
 	}
 	
 

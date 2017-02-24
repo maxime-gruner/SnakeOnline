@@ -16,4 +16,7 @@ public interface ServerProtocol {
 	default void sendMove(Point head, Point tail){}
 	public default void changeDir(String dir){}
 	public default void moveSnake(){}
+	default public void playerQuit(HandlePlayer handlePlayer){}
+	default public void snakeDie(){}
+	default public void cleanSnake(Collection<Point> bodySnake){}
 }

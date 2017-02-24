@@ -70,6 +70,7 @@ public class ServerOutput implements ServerProtocol {
 	}
 
 
+	@Override
 	public void cleanSnake(Collection<Point> bodySnake) {
 		os.println("CLEAN");
 		for (Point point : bodySnake) {
@@ -77,6 +78,12 @@ public class ServerOutput implements ServerProtocol {
 			os.println(point.getOrd());
 		}
 		os.println(".");
+	}
+
+
+	@Override
+	public void snakeDie() {
+		os.println("DIE");
 	}
 
 

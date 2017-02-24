@@ -89,6 +89,9 @@ public class ClientInput {
 					}
 					handler.eraseSnake(bodyP);
 					break;
+				case "DIE":
+					handler.die();
+					break;
 				default:
 					throw new MyProtocolException("Invalid input on client: " + line);
 				}
