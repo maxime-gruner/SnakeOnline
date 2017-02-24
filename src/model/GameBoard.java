@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.JComponent;
@@ -52,5 +53,15 @@ public class GameBoard extends JComponent {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(img, 0, 0, null);
+	}
+
+
+	public void eraseBody(ArrayList<Point> bodyP) {
+		Graphics g = img.getGraphics();
+		g.setColor(Color.BLACK);
+		for (Point p: bodyP) {
+			g.fillRect(p.getAbs()*scale, p.getOrd()*scale, scale, scale);
+		}
+		repaint();
 	}
 }

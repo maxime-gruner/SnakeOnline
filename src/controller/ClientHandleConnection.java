@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import model.ClientCore;
@@ -97,6 +98,11 @@ public class ClientHandleConnection extends Thread implements Runnable, ClientPr
 		System.out.println( "tail : " + tail.toString());
 		c.drawHead(head);
 		c.drawTail(tail);
+	}
+	
+	@Override
+	public void eraseSnake(ArrayList<Point> bodyP) {
+		c.eraseBody(bodyP);
 	}
 
 	

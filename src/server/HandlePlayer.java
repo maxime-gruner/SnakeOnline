@@ -42,7 +42,7 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 			try{
 				playerSocket.close();
 			} catch(IOException e){ e.printStackTrace();}
-			// retirer cleint de la liste quand elle sera faite,
+			SnakeModel.removePlayer(name); 
 			logger.playerDisconnected(playerSocket.toString(), name);
 		}
 	}
@@ -148,6 +148,10 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 
 	public Collection<Point> getBodySnake(){
 		return snake.getBody();
+	}
+
+	public void playerQuit(HandlePlayer handlePlayer) {
+		pOut.cleanSnake(handlePlayer.getBodySnake());
 	}
 	
 	

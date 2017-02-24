@@ -70,6 +70,16 @@ public class ServerOutput implements ServerProtocol {
 	}
 
 
+	public void cleanSnake(Collection<Point> bodySnake) {
+		os.println("CLEAN");
+		for (Point point : bodySnake) {
+			os.println(point.getAbs());
+			os.println(point.getOrd());
+		}
+		os.println(".");
+	}
+
+
 	
 
 

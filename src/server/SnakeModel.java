@@ -17,14 +17,14 @@ public class SnakeModel {
 	
 	public static synchronized void addPlayer (String name, HandlePlayer player){
 		playerList.put(name, player);
-		notifyNewPlayer();
+		notifyChangePlayer();
 	}
 	
 	public static synchronized Set<String> getPlayersName(){
 		return playerList.keySet();
 	}
 	
-	public static synchronized void notifyNewPlayer(){
+	public static synchronized void notifyChangePlayer(){
 		playerList.values().forEach(c -> c.pListChanged());
 	}
 
@@ -47,6 +47,19 @@ public class SnakeModel {
 	public static synchronized void moveSingleSnake(String name){
 		playerList.get(name).moveSnake();
 	}
+
+	public static void removePlayer(String name) {
+		notifyRemovePlayer(playerList.get(name));
+		playerList.remove(name);
+		notifyChangePlayer();
+	}
+
+	private static void notifyRemovePlayer(HandlePlayer handlePlayer) {
+		playerList.values().forEach(c -> c.playerQuit(handlePlayer));
+		
+		
+	}
+
 }
 	
 	

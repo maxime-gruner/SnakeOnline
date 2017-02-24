@@ -79,7 +79,16 @@ public class ClientInput {
 					ord2=is.readLine();
 					handler.drawMove(new Point(Integer.valueOf(abs), Integer.valueOf(ord)),new Point(Integer.valueOf(abs2), Integer.valueOf(ord2)));
 					break;
-				
+				case "CLEAN":
+					bodyP = new ArrayList<>();
+					while(!(abs = is.readLine()).equals(".")){
+						ord = is.readLine();
+						
+						Point p = new Point(Integer.valueOf(abs), Integer.valueOf(ord));
+						bodyP.add(p);
+					}
+					handler.eraseSnake(bodyP);
+					break;
 				default:
 					throw new MyProtocolException("Invalid input on client: " + line);
 				}

@@ -9,7 +9,6 @@ public class Tickle extends Thread {
 				Thread.sleep(1000);
 				SnakeModel.moveSnake();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

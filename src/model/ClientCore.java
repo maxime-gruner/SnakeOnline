@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.JButton;
@@ -162,6 +163,11 @@ public class ClientCore extends JFrame{
 	
 	public void drawTail(Point h){
 		gameBoard.drawTail(h);
+	}
+
+	public void eraseBody(ArrayList<Point> bodyP) {
+		gameBoard.eraseBody(bodyP);
+		
 	}
 	
 }

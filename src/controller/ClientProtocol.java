@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import server.Direction;
@@ -14,4 +15,5 @@ public interface ClientProtocol {
 	default public void initSnake(Collection<Point> bodyP){}	 
 	default public void sendDir(String dir){}
 	default void drawMove(Point head, Point tail){}
+	default public void eraseSnake(ArrayList<Point> bodyP){}
 }
