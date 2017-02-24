@@ -29,7 +29,7 @@ public class ClientOutput  implements ClientProtocol{
 
 	@Override
 	public void sendDir(String dir) {
-		os.println("CHANGE DIR");
+		os.println("KEY");
 		os.println(dir);
 	}
 

@@ -120,25 +120,29 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	
 	@Override
 	public void changeDir(String dir) {
-		Direction d = null;
-		switch (dir){
-			case "Z":
-				d=Direction.Up;
-				break;
-			case "S":
-				d=Direction.Down;
-				break;
-			case "Q":
-				d=Direction.Left;
-				break;
-			case "D":
-				d=Direction.Right;
-				break;
-			default:
-				logger.systemMessage("invalid Key :" +dir +" -> no action");
+		if(dir.equals("M")){
+			SnakeModel.moveSingleSnake(name);
+			}else{
+			Direction d = null;
+			switch (dir){
+				case "Z":
+					d=Direction.Up;
+					break;
+				case "S":
+					d=Direction.Down;
+					break;
+				case "Q":
+					d=Direction.Left;
+					break;
+				case "D":
+					d=Direction.Right;
+					break;
+				default:
+					logger.systemMessage("invalid Key :" +dir +" -> no action");
+			}
+			snake.setDirection(d);
+			logger.playerTurn(name, dir);
 		}
-		snake.setDirection(d);
-		logger.playerTurn(name, dir);
 	}
 
 	public Collection<Point> getBodySnake(){

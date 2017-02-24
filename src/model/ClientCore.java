@@ -102,8 +102,9 @@ public class ClientCore extends JFrame{
 					@Override
 					public void keyPressed(KeyEvent e) {
 						// TODO Auto-generated method stub
-						System.out.println("llolilol");
-						connection.sendDir("" + (char) e.getKeyCode());
+						char key = (char) e.getKeyCode();
+						if(key == 'Q' || key == 'S' || key == 'D' || key == 'Z' || key == 'M')
+						connection.sendDir("" + key);
 					}
 				}
 		);

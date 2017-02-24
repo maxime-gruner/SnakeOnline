@@ -43,6 +43,10 @@ public class SnakeModel {
 	public static synchronized void notifyNewMove(Point head, Point tail){
 		playerList.values().forEach(c-> c.sendMove(head, tail));
 	}
+	
+	public static synchronized void moveSingleSnake(String name){
+		playerList.get(name).moveSnake();
+	}
 }
 	
 	

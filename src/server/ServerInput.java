@@ -31,7 +31,7 @@ public class ServerInput {
 					handler.aPList();
 					handler.newSnake();
 					break;
-				case "CHANGE DIR":
+				case "KEY":
 					dir=is.readLine();
 					handler.changeDir(dir);
 					break;
