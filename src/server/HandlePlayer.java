@@ -69,6 +69,7 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	public void moveSnake() {
 		snake.move();
 		SnakeModel.notifyNewMove(snake.getHead(), snake.getTail());
+		snake.removeTail();
 		
 	}
 

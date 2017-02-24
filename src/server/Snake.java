@@ -16,7 +16,7 @@ public class Snake {
 		
 	
 	public Snake(){
-		direction = Direction.Down;
+		direction = Direction.Right;
 		Point start;
 		start = Point.randomCoord();
 		
@@ -53,6 +53,10 @@ public class Snake {
 		Point head = getHead();
 		Point next = new Point(head.getAbs() + direction.x, head.getOrd() + direction.y);
 		body.add(next);
+		
+	}
+	
+	public void removeTail(){
 		body.remove(0);
 	}
 	
