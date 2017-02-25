@@ -11,9 +11,9 @@ public interface ClientProtocol {
 	default public void nameBad(){};
 	default public void askPList(){};
 	default public void sendPlist(Collection<String> pList){};
-	default public void initSnake(Collection<Point> bodyP){}	 
+	default public void initSnake(Collection<Point> bodyP,String name){}	 
 	default public void sendDir(String dir){}
-	default void drawMove(Point head, Point tail){}
+	default void drawMove(Point head, Point tail,String name){}
 	default public void eraseSnake(ArrayList<Point> bodyP){}
 	default public void die(){}
 }

@@ -41,8 +41,8 @@ public class SnakeModel {
 		playerList.values().forEach(c -> c.pListChanged());
 	}
 
-	public static synchronized void notifyNewSnake(Collection<Point> body) {
-		playerList.values().forEach( c -> c.drawSnake(body));
+	public static synchronized void notifyNewSnake(Collection<Point> body,String name) {
+		playerList.values().forEach( c -> c.drawSnake(body,name));
 	}
 	
 	public static synchronized Collection<HandlePlayer> getAllSnake(){
@@ -53,8 +53,8 @@ public class SnakeModel {
 		playerList.values().forEach(c -> c.moveSnake());
 	}
 	
-	public static synchronized void notifyNewMove(Point head, Point tail){
-		playerList.values().forEach(c-> c.sendMove(head, tail));
+	public static synchronized void notifyNewMove(Point head, Point tail,String name){
+		playerList.values().forEach(c-> c.sendMove(head, tail,name));
 		map[head.getOrd()][head.getAbs()] = 1;
 		map[tail.getOrd()][tail.getAbs()] = 0;
 	}

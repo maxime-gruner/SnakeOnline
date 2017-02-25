@@ -47,16 +47,17 @@ public class ClientInput {
 					break;
 				case "SNAKE NEW":
 					bodyP = new ArrayList<>();
+					name = is.readLine();
 					
 					while(!(abs = is.readLine()).equals(".")){
 						ord = is.readLine();
 						
 						Point p = new Point(Integer.valueOf(abs), Integer.valueOf(ord));
 						bodyP.add(p);
-						System.out.println(p);
+						
 					}
 					
-					handler.initSnake(bodyP);
+					handler.initSnake(bodyP,name);
 					break;
 				case "SNAKE INIT":
 					bodyP = new ArrayList<>();
@@ -70,14 +71,15 @@ public class ClientInput {
 						System.out.println(p);
 					}
 					
-					handler.initSnake(bodyP);
+					handler.initSnake(bodyP,name);
 					break;
 				case "MOVE DONE":
+					name = is.readLine();
 					abs=is.readLine();
 					ord=is.readLine();
 					abs2=is.readLine();
 					ord2=is.readLine();
-					handler.drawMove(new Point(Integer.valueOf(abs), Integer.valueOf(ord)),new Point(Integer.valueOf(abs2), Integer.valueOf(ord2)));
+					handler.drawMove(new Point(Integer.valueOf(abs), Integer.valueOf(ord)),new Point(Integer.valueOf(abs2), Integer.valueOf(ord2)),name);
 					break;
 				case "CLEAN":
 					bodyP = new ArrayList<>();
@@ -91,6 +93,7 @@ public class ClientInput {
 					break;
 				case "DIE":
 					handler.die();
+					stop = true;
 					break;
 				default:
 					throw new MyProtocolException("Invalid input on client: " + line);

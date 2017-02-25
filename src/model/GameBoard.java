@@ -15,7 +15,7 @@ public class GameBoard extends JComponent {
 		
 	private static final long serialVersionUID = 1L;
 
-		BufferedImage img;
+	BufferedImage img;
 
 	private int scale;
 	
@@ -30,6 +30,15 @@ public class GameBoard extends JComponent {
 	
 	public void drawPoints(Collection<Point> lPoint){
 		Graphics g = img.getGraphics();
+		g.setColor(Color.RED);
+		for (Point p: lPoint) {
+			g.fillRect(p.getAbs()*scale, p.getOrd()*scale, scale, scale);
+		}
+		repaint();
+		
+	}
+	public void drawMyPoints(Collection<Point> lPoint){
+		Graphics g = img.getGraphics();
 		g.setColor(Color.WHITE);
 		for (Point p: lPoint) {
 			g.fillRect(p.getAbs()*scale, p.getOrd()*scale, scale, scale);
@@ -39,6 +48,12 @@ public class GameBoard extends JComponent {
 	}
 	
 	public void drawHead(Point p){
+		Graphics g = img.getGraphics();
+		g.setColor(Color.RED);
+		g.fillRect(p.getAbs()*scale, p.getOrd()*scale, scale, scale);
+		repaint();
+	}
+	public void drawMyHead(Point p){
 		Graphics g = img.getGraphics();
 		g.setColor(Color.WHITE);
 		g.fillRect(p.getAbs()*scale, p.getOrd()*scale, scale, scale);

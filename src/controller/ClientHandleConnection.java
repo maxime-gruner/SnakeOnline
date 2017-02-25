@@ -8,7 +8,7 @@ import java.util.Collection;
 import model.ClientCore;
 import server.Point;
 
-public class ClientHandleConnection extends Thread implements Runnable, ClientProtocol  {
+public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	
 	
 	private Socket sock = null;
@@ -81,8 +81,8 @@ public class ClientHandleConnection extends Thread implements Runnable, ClientPr
 	}
 
 	@Override
-	public void initSnake(Collection<Point> bodyP) {
-		c.drawBody(bodyP);
+	public void initSnake(Collection<Point> bodyP, String name) {
+		c.drawBody(bodyP,name);
 		
 	}
 
@@ -92,10 +92,10 @@ public class ClientHandleConnection extends Thread implements Runnable, ClientPr
 	}
 
 	@Override
-	public void drawMove(Point head, Point tail) {
+	public void drawMove(Point head, Point tail,String name) {
 		System.out.println( "head : " + head.toString());
 		System.out.println( "tail : " + tail.toString());
-		c.drawHead(head);
+		c.drawHead(head,name);
 		c.drawTail(tail);
 	}
 	
