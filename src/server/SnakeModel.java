@@ -10,7 +10,9 @@ public class SnakeModel {
 	static int map[][]= new int[HEIGHT][WIDTH];
 	
 	
+	
 	private static final TreeMap<String, HandlePlayer> playerList = new TreeMap<>();
+	private static TreeMap<String, HandlePlayer> playerListCopy = new TreeMap<>();	
 	
 	public  static void initMap(){ 
 		for (int i = 0; i < HEIGHT; i++) {
@@ -38,6 +40,7 @@ public class SnakeModel {
 	}
 	
 	public static synchronized void notifyChangePlayer(){
+		playerListCopy = new TreeMap<>(playerList);
 		playerList.values().forEach(c -> c.pListChanged());
 	}
 
@@ -50,7 +53,8 @@ public class SnakeModel {
 	}
 	
 	public static synchronized void moveSnake(){
-		playerList.values().forEach(c -> c.moveSnake());
+		
+		playerListCopy.values().forEach(c -> c.moveSnake());
 	}
 	
 	public static synchronized void notifyNewMove(Point head, Point tail,String name){
@@ -67,6 +71,7 @@ public class SnakeModel {
 		notifyRemovePlayer(playerList.get(name));
 		playerList.remove(name);
 		notifyChangePlayer();
+		playerListCopy = new TreeMap<>(playerList);
 	}
 
 	private static void notifyRemovePlayer(HandlePlayer handlePlayer) {
