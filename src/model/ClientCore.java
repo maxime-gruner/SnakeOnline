@@ -2,7 +2,9 @@ package model;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
@@ -12,6 +14,7 @@ import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -33,7 +36,7 @@ public class ClientCore extends JFrame{
 	private int port = 1234;
 	private  Socket sock;
 	private boolean connected = false;
-	private String connectAdress = "127.0.0.1";
+	private String connectAdress;
 	private String name="" ;
 	private ClientHandleConnection connection;
 
@@ -41,9 +44,14 @@ public class ClientCore extends JFrame{
 	private JPanel screen;
 	private GameBoard gameBoard;
 	private JTextField nameField;
+	private JLabel labelName ;
 	private JButton acceptButton;
 	private JScrollPane playerListPane;
 	private JList<String> playerList;
+	
+	private JTextField addressField;
+	private JLabel labelAddress;
+	
 
 	public ClientCore() {
 		port = 1234;
@@ -71,7 +79,7 @@ public class ClientCore extends JFrame{
 	private void initComponent(){
 
 
-		startPanel = new JPanel(new FlowLayout() );
+		startPanel = new JPanel(new GridBagLayout() );
 		screen = new JPanel(new BorderLayout() );
 		gameBoard = new GameBoard(200,200,SCALE);
 
@@ -107,18 +115,42 @@ public class ClientCore extends JFrame{
 					}
 				}
 				);
+		
+		addressField = new JTextField("127.0.0.1");
+		addressField.setPreferredSize(new Dimension(90, 20));
 
 		acceptButton.addActionListener( l->{
 			this.name = nameField.getText();
 			setContentPane(screen);
 			gameBoard.requestFocusInWindow();
 			validate();
+			this.connectAdress = addressField.getText();
 			connect();
 
 
 		});
-		startPanel.add(nameField);
-		startPanel.add(acceptButton);
+		
+		labelAddress = new JLabel("Enter the Adress: ");
+		labelName = new JLabel("Enter the name: ");
+		
+		
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.gridx = 0; c.gridy = 0;
+		c.insets = new Insets(10, 10, 10, 0);
+		startPanel.add(labelName,c);
+		c.gridx = 1; c.gridy = 0; 
+		startPanel.add(nameField,c);
+		
+		
+		c.gridx = 2; c.gridy = 0;
+		startPanel.add(labelAddress,c);
+		c.gridx =3;
+		startPanel.add(addressField,c);
+		
+		
+		c.gridy = 3; c.gridx = 0; c.gridwidth = 4;
+		startPanel.add(acceptButton,c);
 
 
 		playerListPane.setPreferredSize(new Dimension(150, 50));
