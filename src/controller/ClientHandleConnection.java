@@ -92,10 +92,14 @@ public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	}
 
 	@Override
-	public void drawMove(Point head, Point tail,String name) {
+	public void drawMoveHead(Point head,String name) {
 		System.out.println( "head : " + head.toString());
-		System.out.println( "tail : " + tail.toString());
 		c.drawHead(head,name);
+	}
+
+	@Override
+	public void drawMoveTail(Point tail) {
+		System.out.println( "tail : " + tail.toString());
 		c.drawTail(tail);
 	}
 	
@@ -107,6 +111,11 @@ public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	@Override
 	public void die() {
 		finish(); // a changer
+	}
+
+	@Override
+	public void drawApple(Point a) {
+		c.drawApple(a);
 	}
 
 	

@@ -82,4 +82,11 @@ public class GameBoard extends JComponent {
 		}
 		repaint();
 	}
+	
+	public void drawApple(Point p){
+		Graphics g = img.getGraphics();
+		g.setColor(Color.GREEN);
+		g.fillRect(p.getAbs()*scale, p.getOrd()*scale, scale, scale);
+		repaint();
+	}
 }

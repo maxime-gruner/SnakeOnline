@@ -1,5 +1,6 @@
 package server;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 import java.util.TreeMap;
@@ -12,7 +13,8 @@ public class SnakeModel {
 	
 	
 	private static final TreeMap<String, HandlePlayer> playerList = new TreeMap<>();
-	private static TreeMap<String, HandlePlayer> playerListCopy = new TreeMap<>();	
+	private static TreeMap<String, HandlePlayer> playerListCopy = new TreeMap<>();
+	private static Apple appleList;
 	
 	public  static void initMap(){ 
 		for (int i = 0; i < HEIGHT; i++) {
@@ -23,6 +25,7 @@ public class SnakeModel {
 			map[0][i] = 999;
 			map[HEIGHT-1][i] = 999;
 		}
+		appleList=new Apple();
 	}
 	
 	
@@ -57,10 +60,16 @@ public class SnakeModel {
 		playerListCopy.values().forEach(c -> c.moveSnake());
 	}
 	
-	public static synchronized void notifyNewMove(Point head, Point tail,String name){
-		playerList.values().forEach(c-> c.sendMove(head, tail,name));
+	public static synchronized void notifyNewMoveHead(Point head,String name){
+		playerList.values().forEach(c-> c.sendMoveHead(head, name));
 		map[head.getOrd()][head.getAbs()] = 1;
+		
+	}
+
+	public static synchronized void notifyNewMoveTail(Point tail,String name){
+		playerList.values().forEach(c-> c.sendMoveTail(tail));
 		map[tail.getOrd()][tail.getAbs()] = 0;
+		
 	}
 	
 	public static synchronized void moveSingleSnake(String name){
@@ -78,14 +87,20 @@ public class SnakeModel {
 		playerList.values().forEach(c -> c.playerQuit(handlePlayer));
 	}
 	
-	public static boolean checkCollision(Snake snake){
+	public static int checkCollision(Snake snake){
 		Point toTest = snake.getAhead();
 		System.out.println("test: "+ toTest);
 		if(map[toTest.getOrd()][toTest.getAbs()] >= 1 ){
 			System.out.println("COLLIDE");
-			return true;
+			return 1;
 		}
-		return false;
+		if(map[toTest.getOrd()][toTest.getAbs()] == -1 ){
+			System.out.println("MANGE POMME");
+			System.out.println("COORDONNEES POMME : "+ toTest.getAbs() + toTest.getOrd());
+			appleList.removeApple(toTest);
+			return -1;
+		}
+		return 0;
 		
 	}
 
@@ -95,7 +110,26 @@ public class SnakeModel {
 			System.out.println("in " + point.getOrd() + "  " + point.getAbs());
 		}
 	}
+	
+	public static void addApple(){
+		appleList.addApple(Point.randomCoord());
+	}
+	
+	public static void notifyNewApple(Point a){
+		playerList.values().forEach(c -> c.newApple(a));
+		map[a.getOrd()][a.getAbs()] = -1;
+	}
+	
+	public synchronized static ArrayList<Point> getAllApple(){
+		return appleList.getList();
+	}
 
+
+	public static void removeApple(Point apple) {
+		
+		appleList.removeApple(apple);
+		
+	}
 }
 	
 	

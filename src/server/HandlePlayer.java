@@ -67,22 +67,36 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 
 	@Override
 	public void moveSnake() {
-		if(SnakeModel.checkCollision(snake)){
-			snake.die();
-			pOut.snakeDie();
-			finish();
-			return;
-		}
-
-		snake.move();
-		SnakeModel.notifyNewMove(snake.getHead(), snake.getTail(),name);
-		snake.removeTail();
-
+		switch( SnakeModel.checkCollision(snake)){
+			case 1: // collision
+				snake.die();
+				pOut.snakeDie();
+				finish();
+				break;
+			case 0: // move regulier
+				snake.move();
+				SnakeModel.notifyNewMoveHead(snake.getHead(),name);
+				SnakeModel.notifyNewMoveTail(snake.getTail(),name);
+				snake.removeTail();
+				break;
+			case -1 :// mange pomme donc grow
+				snake.move();
+				SnakeModel.notifyNewMoveHead(snake.getHead(), name);
+				SnakeModel.removeApple(snake.getHead());
+				System.out.println("COORDONNEES DE REMOVE 2 : "+ snake.getHead().getAbs() + snake.getHead().getOrd());
+				break;
+				
+			}
 	}
 
 	@Override
-	public void sendMove(Point head, Point tail,String name) {
-		pOut.sendMove(head, tail,name);
+	public void sendMoveHead(Point head,String name) {
+		pOut.sendMoveHead(head, name);
+	}
+	
+	@Override
+	public void sendMoveTail(Point tail) {
+		pOut.sendMoveTail(tail);
 	}
 
 	@Override
@@ -116,9 +130,12 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 		for (HandlePlayer handle : SnakeModel.getAllSnake()) {
 			pOut.sendSnake(handle.name, handle.getBodySnake());
 		}
-
+		
 		SnakeModel.notifyNewSnake(snake.getBody(),name);
 
+		for ( Point apple : SnakeModel.getAllApple()){
+			pOut.newApple(apple);
+		}
 	}
 
 	@Override
@@ -163,8 +180,13 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 		pOut.cleanSnake(handlePlayer.getBodySnake());
 	}
 
+	@Override
+	public void newApple(Point p) {
+		pOut.newApple(p);
+	}
 
 
+	
 
 
 

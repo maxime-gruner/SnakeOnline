@@ -13,11 +13,13 @@ public interface ServerProtocol {
 	default void drawSnake(Collection<Point> body,String name){}
 	default void newSnake(){}
 	default void sendSnake(String name, Collection<Point> body){}
-	default void sendMove(Point head, Point tail,String name){}
+	default void sendMoveHead(Point head,String name){}
+	default void sendMoveTail(Point tail){}
 	public default void changeDir(String dir){}
 	public default void moveSnake(){}
 	default public void playerQuit(HandlePlayer handlePlayer){}
 	default public void snakeDie(){}
 	default public void cleanSnake(Collection<Point> bodySnake){}
+	default public void newApple(Point p){}
 	
 }

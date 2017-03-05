@@ -208,5 +208,8 @@ public class ClientCore extends JFrame{
 		gameBoard.eraseBody(bodyP);
 
 	}
-
+	
+	public void drawApple(Point a){
+		gameBoard.drawApple(a);
+	}
 }

@@ -62,15 +62,19 @@ public class ServerOutput implements ServerProtocol {
 
 
 	@Override
-	public void sendMove(Point head, Point tail,String name) {
-		os.println("MOVE DONE");
+	public void sendMoveHead(Point head,String name) {
+		os.println("MOVE HEAD");
 		os.println(name);
 		os.println(head.getAbs());
 		os.println(head.getOrd());
+	}
+
+	@Override
+	public void sendMoveTail(Point tail) {
+		os.println("MOVE TAIL");
 		os.println(tail.getAbs());
 		os.println(tail.getOrd());
 	}
-
 
 	@Override
 	public void cleanSnake(Collection<Point> bodySnake) {
@@ -86,6 +90,14 @@ public class ServerOutput implements ServerProtocol {
 	@Override
 	public void snakeDie() {
 		os.println("DIE");
+	}
+
+
+	@Override
+	public void newApple(Point p) {
+		os.println("NEW APPLE");
+		os.println(p.getAbs());
+		os.println(p.getOrd());
 	}
 
 

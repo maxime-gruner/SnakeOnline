@@ -73,13 +73,16 @@ public class ClientInput {
 					
 					handler.initSnake(bodyP,name);
 					break;
-				case "MOVE DONE":
+				case "MOVE HEAD":
 					name = is.readLine();
 					abs=is.readLine();
 					ord=is.readLine();
-					abs2=is.readLine();
-					ord2=is.readLine();
-					handler.drawMove(new Point(Integer.valueOf(abs), Integer.valueOf(ord)),new Point(Integer.valueOf(abs2), Integer.valueOf(ord2)),name);
+					handler.drawMoveHead(new Point(Integer.valueOf(abs), Integer.valueOf(ord)),name);
+					break;
+				case "MOVE TAIL":
+					abs=is.readLine();
+					ord=is.readLine();
+					handler.drawMoveTail(new Point(Integer.valueOf(abs), Integer.valueOf(ord)));
 					break;
 				case "CLEAN":
 					bodyP = new ArrayList<>();
@@ -94,6 +97,11 @@ public class ClientInput {
 				case "DIE":
 					handler.die();
 					stop = true;
+					break;
+				case "NEW APPLE":
+					abs=is.readLine();
+					ord=is.readLine();
+					handler.drawApple(new Point(Integer.valueOf(abs), Integer.valueOf(ord)));
 					break;
 				default:
 					throw new MyProtocolException("Invalid input on client: " + line);
