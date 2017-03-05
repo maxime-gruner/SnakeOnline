@@ -127,7 +127,10 @@ public class SnakeModel {
 
 	public static void removeApple(Point apple) {
 		
-		appleList.removeApple(apple);
+		int n = appleList.removeApple(apple);
+		if(n != -1){
+			appleList.removeIndexApple(n);
+		}
 		
 	}
 }

@@ -83,7 +83,6 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 				snake.move();
 				SnakeModel.notifyNewMoveHead(snake.getHead(), name);
 				SnakeModel.removeApple(snake.getHead());
-				System.out.println("COORDONNEES DE REMOVE 2 : "+ snake.getHead().getAbs() + snake.getHead().getOrd());
 				break;
 				
 			}

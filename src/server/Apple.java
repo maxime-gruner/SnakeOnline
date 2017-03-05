@@ -16,9 +16,26 @@ public class Apple {
 		SnakeModel.notifyNewApple(p);
 	}
 	
-	public void removeApple(Point p){
-		if(appleList.contains(p)) appleList.remove(p);
-		else System.out.println("pomme pas trouvée \n_n");
+	public int removeApple(Point p){
+		int toDelete = 0;
+		for (Point point : appleList) {
+			if(point.getAbs() == p.getAbs() && point.getOrd() == p.getOrd()){
+				System.out.println("trouver a l index " +toDelete + " total: " + appleList.size());
+				return toDelete;
+			}else{
+				System.out.println("not in " + toDelete);
+				toDelete++;
+				
+			}
+			
+			
+		}
+		return -1;
+		
+}
+	
+	public void removeIndexApple(int index){
+		appleList.remove(index);
 	}
 	
 	public ArrayList<Point> getList(){

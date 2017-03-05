@@ -1,19 +1,19 @@
 package server;
 
 public class Tickle extends Thread {
-	private boolean pommes = false;
+	private int pomme = 0;
+	
 	@Override
 	public void run() {
 		while(true){
 			try {
 				Thread.sleep(1000);
 				SnakeModel.moveSnake();
-				if (pommes ){
-					pommes = false;
-				}else{
-					pommes = true;
+				if(pomme >= 5){
+					pomme = 0;
 					SnakeModel.addApple();
 				}
+				pomme++;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
