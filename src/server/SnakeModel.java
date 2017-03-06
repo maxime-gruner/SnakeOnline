@@ -84,19 +84,18 @@ public class SnakeModel {
 	}
 
 	private static void notifyRemovePlayer(HandlePlayer handlePlayer) {
+		for (Point p : handlePlayer.getBodySnake()) {
+			map[p.getOrd()][p.getAbs()] = 0;
+		}
 		playerList.values().forEach(c -> c.playerQuit(handlePlayer));
 	}
 	
 	public static int checkCollision(Snake snake){
 		Point toTest = snake.getAhead();
-		System.out.println("test: "+ toTest);
 		if(map[toTest.getOrd()][toTest.getAbs()] >= 1 ){
-			System.out.println("COLLIDE");
 			return 1;
 		}
 		if(map[toTest.getOrd()][toTest.getAbs()] == -1 ){
-			System.out.println("MANGE POMME");
-			System.out.println("COORDONNEES POMME : "+ toTest.getAbs() + toTest.getOrd());
 			appleList.removeApple(toTest);
 			return -1;
 		}
@@ -107,7 +106,6 @@ public class SnakeModel {
 	public static void spawnSnake(Collection<Point> body) {
 		for (Point point : body) {
 			map[point.getOrd()][point.getAbs()] = 1;
-			System.out.println("in " + point.getOrd() + "  " + point.getAbs());
 		}
 	}
 	

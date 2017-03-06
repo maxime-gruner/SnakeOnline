@@ -20,10 +20,8 @@ public class Apple {
 		int toDelete = 0;
 		for (Point point : appleList) {
 			if(point.getAbs() == p.getAbs() && point.getOrd() == p.getOrd()){
-				System.out.println("trouver a l index " +toDelete + " total: " + appleList.size());
 				return toDelete;
 			}else{
-				System.out.println("not in " + toDelete);
 				toDelete++;
 				
 			}

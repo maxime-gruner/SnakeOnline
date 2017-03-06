@@ -192,7 +192,6 @@ public class ClientCore extends JFrame{
 	}
 
 	public void drawHead(Point h,String name){
-		System.out.println("ACTUAL CLASS NAME: "+ this.name + " NAME SENT " + name);
 		if(name.equals(this.name)){
 			gameBoard.drawMyHead(h);
 		}else{

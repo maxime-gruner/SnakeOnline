@@ -7,7 +7,7 @@ public class Tickle extends Thread {
 	public void run() {
 		while(true){
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(200);
 				SnakeModel.moveSnake();
 				if(pomme >= 5){
 					pomme = 0;
