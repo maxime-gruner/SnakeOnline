@@ -6,8 +6,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class SnakeModel {
-	static int WIDTH = 200;
-	static int HEIGHT = 200;
+	public static int WIDTH = 200;
+	public static int HEIGHT = 200;
 	static int map[][]= new int[HEIGHT][WIDTH];
 	
 	

@@ -22,6 +22,8 @@ import javax.swing.JTextField;
 
 import controller.ClientHandleConnection;
 import server.Point;
+import server.Snake;
+import server.SnakeModel;
 
 public class ClientCore extends JFrame{
 
@@ -29,9 +31,8 @@ public class ClientCore extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	static int WIDTH = 800;
-	static int HEIGHT = 800;
-	static int SCALE = 4;
+	
+	static int SCALE = 4; //a changer pour la taille de la FENETRE
 
 	private int port = 1234;
 	private  Socket sock;
@@ -81,7 +82,7 @@ public class ClientCore extends JFrame{
 
 		startPanel = new JPanel(new GridBagLayout() );
 		screen = new JPanel(new BorderLayout() );
-		gameBoard = new GameBoard(200,200,SCALE);
+		gameBoard = new GameBoard(SnakeModel.WIDTH,SnakeModel.HEIGHT,SCALE);
 
 
 		playerList = new JList<>();
@@ -157,8 +158,8 @@ public class ClientCore extends JFrame{
 		screen.add(gameBoard,BorderLayout.CENTER);
 		screen.add(playerListPane,BorderLayout.EAST);
 
-		setResizable(false);
-		setPreferredSize(new Dimension(WIDTH+150, HEIGHT));
+		//setResizable(false);
+		setPreferredSize(new Dimension(SnakeModel.WIDTH*SCALE+150, SnakeModel.HEIGHT*SCALE));
 		setTitle("Snake");
 		setContentPane(startPanel);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
