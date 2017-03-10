@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
@@ -32,7 +34,7 @@ public class ClientCore extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	static int SCALE = 4; //a changer pour la taille de la FENETRE
+	static int SCALE = 3; //a changer pour la taille de la FENETRE
 
 	private int port = 1234;
 	private  Socket sock;
@@ -53,6 +55,8 @@ public class ClientCore extends JFrame{
 	private JTextField addressField;
 	private JLabel labelAddress;
 	
+	
+	
 
 	public ClientCore() {
 		port = 1234;
@@ -69,6 +73,7 @@ public class ClientCore extends JFrame{
 			connection = new ClientHandleConnection(sock, this);
 		} catch (IOException e) {
 			e.printStackTrace();
+			
 		}
 		connected = true;
 		connection.start();
@@ -155,10 +160,35 @@ public class ClientCore extends JFrame{
 
 
 		playerListPane.setPreferredSize(new Dimension(150, 50));
+		playerListPane.setFocusable(false);
+		playerList.setFocusable(false);
 		screen.add(gameBoard,BorderLayout.CENTER);
 		screen.add(playerListPane,BorderLayout.EAST);
 
-		//setResizable(false);
+		
+		nameField.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER){
+					System.out.println("test");
+					acceptButton.doClick();
+				}
+			}
+		});
+		setResizable(false);
 		setPreferredSize(new Dimension(SnakeModel.WIDTH*SCALE+150, SnakeModel.HEIGHT*SCALE));
 		setTitle("Snake");
 		setContentPane(startPanel);
