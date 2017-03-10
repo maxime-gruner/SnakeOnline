@@ -35,8 +35,8 @@ public class Point {
 	}
 	
 	public static Point randomCoord(){
-		int x = rnd.nextInt(SnakeModel.WIDTH);
-		int y = rnd.nextInt(SnakeModel.HEIGHT);
+		int x = rnd.nextInt(SnakeModel.WIDTH-10);
+		int y = rnd.nextInt(SnakeModel.HEIGHT-10);
 		return new Point(x, y);
 	}
 }

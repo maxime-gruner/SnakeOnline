@@ -89,11 +89,11 @@ public class ClientCore extends JFrame{
 		screen = new JPanel(new BorderLayout() );
 		gameBoard = new GameBoard(SnakeModel.WIDTH,SnakeModel.HEIGHT,SCALE);
 
-
+		screen.setPreferredSize(new Dimension(SnakeModel.WIDTH*SCALE,SnakeModel.HEIGHT*SCALE));
 		playerList = new JList<>();
 		playerListPane = new JScrollPane(playerList);
 
-
+		
 		nameField = new JTextField(5);
 		acceptButton = new JButton("Connect");
 
@@ -130,6 +130,7 @@ public class ClientCore extends JFrame{
 			setContentPane(screen);
 			gameBoard.requestFocusInWindow();
 			validate();
+			
 			this.connectAdress = addressField.getText();
 			connect();
 
@@ -183,7 +184,6 @@ public class ClientCore extends JFrame{
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
-					System.out.println("test");
 					acceptButton.doClick();
 				}
 			}
@@ -194,6 +194,7 @@ public class ClientCore extends JFrame{
 		setContentPane(startPanel);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
+		setLocationRelativeTo(null); //centre la fenetre
 		setVisible(true);
 	}
 

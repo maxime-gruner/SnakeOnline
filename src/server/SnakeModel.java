@@ -76,21 +76,21 @@ public class SnakeModel {
 		playerList.get(name).moveSnake();
 	}
 
-	public static void removePlayer(String name) {
+	public static synchronized void removePlayer(String name) {
 		notifyRemovePlayer(playerList.get(name));
 		playerList.remove(name);
 		notifyChangePlayer();
 		playerListCopy = new TreeMap<>(playerList);
 	}
 
-	private static void notifyRemovePlayer(HandlePlayer handlePlayer) {
+	private static synchronized void notifyRemovePlayer(HandlePlayer handlePlayer) {
 		for (Point p : handlePlayer.getBodySnake()) {
 			map[p.getOrd()][p.getAbs()] = 0;
 		}
 		playerList.values().forEach(c -> c.playerQuit(handlePlayer));
 	}
 	
-	public static int checkCollision(Snake snake){
+	public static synchronized int checkCollision(Snake snake){
 		Point toTest = snake.getAhead();
 		if(map[toTest.getOrd()][toTest.getAbs()] >= 1 ){
 			return 1;
@@ -103,27 +103,27 @@ public class SnakeModel {
 		
 	}
 
-	public static void spawnSnake(Collection<Point> body) {
+	public static synchronized void spawnSnake(Collection<Point> body) {
 		for (Point point : body) {
 			map[point.getOrd()][point.getAbs()] = 1;
 		}
 	}
 	
-	public static void addApple(){
+	public static synchronized void addApple(){
 		appleList.addApple(Point.randomCoord());
 	}
 	
-	public static void notifyNewApple(Point a){
+	public static synchronized void notifyNewApple(Point a){
 		playerList.values().forEach(c -> c.newApple(a));
 		map[a.getOrd()][a.getAbs()] = -1;
 	}
 	
-	public synchronized static ArrayList<Point> getAllApple(){
+	public static synchronized ArrayList<Point> getAllApple(){
 		return appleList.getList();
 	}
 
 
-	public static void removeApple(Point apple) {
+	public static synchronized void removeApple(Point apple) {
 		
 		int n = appleList.removeApple(apple);
 		if(n != -1){

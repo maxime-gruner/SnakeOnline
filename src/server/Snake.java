@@ -13,6 +13,8 @@ public class Snake {
 	private List<Point> body = new ArrayList<>();
 	private Direction direction;
 	private boolean alive = true;
+	
+	private boolean canMove = true;
 		
 	
 	public Snake(){
@@ -33,6 +35,7 @@ public class Snake {
 	}
 	
 	public void setDirection(Direction direction){
+		if(!canMove) return;
 		if(this.direction == Direction.Right && direction == Direction.Left){
 			return;
 		}if(this.direction == Direction.Left && direction == Direction.Right){
@@ -43,6 +46,8 @@ public class Snake {
 		}if(this.direction == Direction.Up && direction == Direction.Down){
 			return;
 		}
+		canMove = false;
+		
 		this.direction = direction;
 		
 	}
@@ -63,6 +68,7 @@ public class Snake {
 		Point head = getHead();
 		Point next = new Point(head.getAbs() + direction.x, head.getOrd() + direction.y);
 		body.add(next);
+		canMove = true;
 		
 	}
 	

@@ -70,6 +70,7 @@ public class GameBoard extends JComponent {
 	}
 	
 	
+	
 	public void drawPoints(Collection<Point> lPoint){
 		Graphics g = img.getGraphics();
 		g.setColor(Color.RED);
@@ -148,8 +149,11 @@ public class GameBoard extends JComponent {
 
 	public void eraseBody(ArrayList<Point> bodyP) {
 		Graphics g = img.getGraphics();
-		g.setColor(Color.BLACK);
+
 		for (Point p: bodyP) {
+			int erase = background.getRGB(p.getAbs()*scale,p.getOrd()*scale);
+			
+			g.setColor(new Color(erase));
 			g.fillRect(p.getAbs()*scale, p.getOrd()*scale, scale, scale);
 		}
 		repaint();

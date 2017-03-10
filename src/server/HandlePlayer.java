@@ -2,6 +2,7 @@ package server;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class HandlePlayer implements Runnable, ServerProtocol {
@@ -67,6 +68,7 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 
 	@Override
 	public void moveSnake() {
+		if(state != PlayerState.ST_LOGGED) return;
 		switch( SnakeModel.checkCollision(snake)){
 			case 1: // collision
 				snake.die();
@@ -131,14 +133,18 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 		}
 		
 		SnakeModel.notifyNewSnake(snake.getBody(),name);
+		
+		ArrayList<Point> appleListCopy = new ArrayList<>(SnakeModel.getAllApple());
 
-		for ( Point apple : SnakeModel.getAllApple()){
+		for ( Point apple : appleListCopy){
 			pOut.newApple(apple);
 		}
+		state = PlayerState.ST_LOGGED;
 	}
 
 	@Override
 	public void drawSnake(Collection<Point> body,String name) {
+		if(this.name.equals(name)) return;
 			pOut.createSnake(body,name);
 	}
 
