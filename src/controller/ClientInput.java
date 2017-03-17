@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import server.Point;
 
@@ -20,11 +22,11 @@ public class ClientInput {
 	}
 	
 	public void doRun() throws IOException{
-		ArrayList<String> pList;
+		Map<String, Integer> pList;
 		ArrayList<Point> bodyP;
 		String name;
-		String abs,abs2;
-		String ord,ord2;
+		String abs;
+		String ord;
 		
 		try(BufferedReader is = new BufferedReader(new InputStreamReader(in))){
 			while(!stop){
@@ -38,10 +40,12 @@ public class ClientInput {
 					handler.nameBad();
 					break;
 				case "PLIST":
-					pList = new ArrayList<>();
+					pList = new TreeMap<>();
 					String x;
+					Integer score;
 					while(!(x = is.readLine()).equals(".")){
-						pList.add(x);
+						score = Integer.valueOf(is.readLine());
+						pList.put(x,score);
 					}
 					handler.sendPlist(pList);
 					break;
@@ -93,6 +97,11 @@ public class ClientInput {
 						bodyP.add(p);
 					}
 					handler.eraseSnake(bodyP);
+					break;
+				case "SCORE":
+					name = is.readLine();
+					ord=is.readLine();
+					handler.reclass(name, Integer.valueOf(ord));
 					break;
 				case "DIE":
 					handler.die();

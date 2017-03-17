@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -205,7 +207,14 @@ public class ClientCore extends JFrame{
 		this.name = name;
 	}
 
-
+	public void fillUserList( Map<String,Integer> plist){
+		Collection<String> to_print = new ArrayList<>();
+		for(Map.Entry<String, Integer> entry : plist.entrySet()){
+			to_print.add(entry.getKey() +" "+ entry.getValue().toString());
+		}
+		playerList.setListData(to_print.toArray(new String[0]));
+	}
+	
 	public void fillUserList(Collection<String> plist){
 		playerList.setListData(plist.toArray(new String[0]));
 	}

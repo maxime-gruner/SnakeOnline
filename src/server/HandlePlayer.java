@@ -11,6 +11,7 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	private ServerInput pIn;
 	private String name = "";
 	private Snake snake;
+	private int score ;
 	private IPlayerLogger logger = null;
 	private boolean stop = false, play=true;
 
@@ -20,6 +21,14 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	public HandlePlayer (Socket playerSocket, IPlayerLogger logger) throws IOException{
 		this.playerSocket = playerSocket;
 		this.logger = logger;
+		this.score = 0;
+	}
+	
+	public int getScore(){
+		return this.score;
+	}
+	public String getName(){
+		return this.name;
 	}
 
 	@Override
@@ -83,6 +92,8 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 				break;
 			case -1 :// mange pomme donc grow
 				snake.move();
+				score ++;
+				//SnakeModel.notifyIncreasePoint(name,score);
 				SnakeModel.notifyNewMoveHead(snake.getHead(), name);
 				SnakeModel.removeApple(snake.getHead());
 				break;
@@ -188,6 +199,11 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	@Override
 	public void newApple(Point p) {
 		pOut.newApple(p);
+	}
+
+	@Override
+	public void sendScore(String name, int point) {
+		pOut.sendScore(name, point);
 	}
 
 

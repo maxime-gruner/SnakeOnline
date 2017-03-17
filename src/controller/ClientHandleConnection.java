@@ -4,13 +4,17 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import model.ClientCore;
 import server.Point;
 
 public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	
-	
+	private Map<String, Integer> playerScore = new TreeMap<String, Integer>(); 
 	private Socket sock = null;
 	private ClientOutput cOut;
 	private ClientInput cIn;
@@ -75,9 +79,12 @@ public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 		
 	}
 
+	
+
 	@Override
-	public void sendPlist(Collection<String> pList) {
-		c.fillUserList(pList);
+	public void sendPlist(Map<String, Integer> pList) {
+		playerScore = pList;
+		c.fillUserList(sortByValue(playerScore));
 	}
 
 	@Override
@@ -117,7 +124,17 @@ public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	}
 
 	
-	
+	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+	    return map.entrySet()
+	              .stream()
+	              .sorted(Map.Entry.comparingByValue(/*Collections.reverseOrder()*/))
+	              .collect(Collectors.toMap(
+	                Map.Entry::getKey, 
+	                Map.Entry::getValue, 
+	                (e1, e2) -> e1, 
+	                LinkedHashMap::new
+	              ));
+	}
 	
 
 }

@@ -1,12 +1,13 @@
 package server;
 
 import java.util.Collection;
+import java.util.TreeMap;
 
 public interface ServerProtocol {
 	default public void onReceiveName(String name){}
 	public void nameOK();
 	public void nameBad();
-	default public void sendPList(Collection<String> pList){}
+	default public void sendPList(TreeMap<String, Integer> pList){}
 	default public void createSnake(Collection<Point> body,String name){ }
 	default public void aPList(){}
 	default public void pListChanged(){}
@@ -21,5 +22,5 @@ public interface ServerProtocol {
 	default public void snakeDie(){}
 	default public void cleanSnake(Collection<Point> bodySnake){}
 	default public void newApple(Point p){}
-	
+	default public void sendScore(String name, int point){}
 }

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class ServerOutput implements ServerProtocol {
 	PrintWriter os;
@@ -27,9 +29,12 @@ public class ServerOutput implements ServerProtocol {
 
 
 	@Override
-	public void sendPList(Collection<String> pList){
+	public void sendPList(TreeMap<String,Integer> pList){
 		os.println("PLIST");
-		pList.forEach(os::println);
+		for(Map.Entry<String, Integer> entry : pList.entrySet()){
+			os.println(entry.getKey());
+			os.println(entry.getValue().toString());
+		}
 		os.println(".");
 	}
 
@@ -98,6 +103,14 @@ public class ServerOutput implements ServerProtocol {
 		os.println("NEW APPLE");
 		os.println(p.getAbs());
 		os.println(p.getOrd());
+	}
+
+
+	@Override
+	public void sendScore(String name, int point) {
+		os.println("SCORE");
+		os.println(name);
+		os.println(point);
 	}
 
 

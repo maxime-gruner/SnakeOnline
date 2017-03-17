@@ -2,6 +2,7 @@ package server;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -38,8 +39,12 @@ public class SnakeModel {
 		notifyChangePlayer();
 	}
 	
-	public static synchronized Set<String> getPlayersName(){
-		return playerList.keySet();
+	public static synchronized TreeMap<String, Integer> getPlayersName(){
+		TreeMap<String, Integer> to_return = new TreeMap<String, Integer>();
+		playerList.values().forEach(c-> to_return.put(c.getName(), c.getScore()));
+		
+		
+		return to_return;
 	}
 	
 	public static synchronized void notifyChangePlayer(){
