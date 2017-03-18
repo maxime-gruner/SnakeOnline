@@ -14,7 +14,7 @@ public interface ServerProtocol {
 	default void drawSnake(Collection<Point> body,String name){}
 	default void newSnake(){}
 	default void sendSnake(String name, Collection<Point> body){}
-	default void sendMoveHead(Point head,String name){}
+	default void sendMoveHead(Point head,String name, Integer score){}
 	default void sendMoveTail(Point tail){}
 	public default void changeDir(String dir){}
 	public default void moveSnake(){}

@@ -86,15 +86,14 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 				break;
 			case 0: // move regulier
 				snake.move();
-				SnakeModel.notifyNewMoveHead(snake.getHead(),name);
+				SnakeModel.notifyNewMoveHead(snake.getHead(),name,0);
 				SnakeModel.notifyNewMoveTail(snake.getTail(),name);
 				snake.removeTail();
 				break;
 			case -1 :// mange pomme donc grow
 				snake.move();
 				score ++;
-				//SnakeModel.notifyIncreasePoint(name,score);
-				SnakeModel.notifyNewMoveHead(snake.getHead(), name);
+				SnakeModel.notifyNewMoveHead(snake.getHead(), name,1);
 				SnakeModel.removeApple(snake.getHead());
 				break;
 				
@@ -102,8 +101,8 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	}
 
 	@Override
-	public void sendMoveHead(Point head,String name) {
-		pOut.sendMoveHead(head, name);
+	public void sendMoveHead(Point head,String name, Integer score) {
+		pOut.sendMoveHead(head, name, score);
 	}
 	
 	@Override
@@ -127,6 +126,8 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 		pOut.sendPList(SnakeModel.getPlayersName());
 
 	}
+	
+	
 
 	@Override
 	public void pListChanged(){

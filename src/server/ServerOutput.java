@@ -67,11 +67,12 @@ public class ServerOutput implements ServerProtocol {
 
 
 	@Override
-	public void sendMoveHead(Point head,String name) {
+	public void sendMoveHead(Point head,String name, Integer score) {
 		os.println("MOVE HEAD");
 		os.println(name);
 		os.println(head.getAbs());
 		os.println(head.getOrd());
+		os.println(score.toString());
 	}
 
 	@Override

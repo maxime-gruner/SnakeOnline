@@ -83,8 +83,8 @@ public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 
 	@Override
 	public void sendPlist(Map<String, Integer> pList) {
-		playerScore = pList;
-		c.fillUserList(sortByValue(playerScore));
+		playerScore = sortByValue(pList);
+		c.fillUserList(playerScore);
 	}
 
 	@Override
@@ -124,6 +124,13 @@ public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	}
 
 	
+	@Override
+	public void reclass(String name, Integer score) {
+		int newscore = playerScore.get(name);
+		playerScore.replace(name, newscore+score);
+		c.fillUserList(playerScore);
+	}
+
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
 	    return map.entrySet()
 	              .stream()

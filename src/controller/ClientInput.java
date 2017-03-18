@@ -27,6 +27,7 @@ public class ClientInput {
 		String name;
 		String abs;
 		String ord;
+		Integer score;
 		
 		try(BufferedReader is = new BufferedReader(new InputStreamReader(in))){
 			while(!stop){
@@ -42,7 +43,6 @@ public class ClientInput {
 				case "PLIST":
 					pList = new TreeMap<>();
 					String x;
-					Integer score;
 					while(!(x = is.readLine()).equals(".")){
 						score = Integer.valueOf(is.readLine());
 						pList.put(x,score);
@@ -81,7 +81,9 @@ public class ClientInput {
 					name = is.readLine();
 					abs=is.readLine();
 					ord=is.readLine();
+					score = Integer.valueOf(is.readLine());
 					handler.drawMoveHead(new Point(Integer.valueOf(abs), Integer.valueOf(ord)),name);
+					if(score != 0)  handler.reclass(name,score); 
 					break;
 				case "MOVE TAIL":
 					abs=is.readLine();

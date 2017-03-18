@@ -65,8 +65,8 @@ public class SnakeModel {
 		playerListCopy.values().forEach(c -> c.moveSnake());
 	}
 	
-	public static synchronized void notifyNewMoveHead(Point head,String name){
-		playerList.values().forEach(c-> c.sendMoveHead(head, name));
+	public static synchronized void notifyNewMoveHead(Point head,String name, int score){
+		playerList.values().forEach(c-> c.sendMoveHead(head, name,score));
 		map[head.getOrd()][head.getAbs()] = 1;
 		
 	}
@@ -136,6 +136,7 @@ public class SnakeModel {
 		}
 		
 	}
+	
 }
 	
 	
