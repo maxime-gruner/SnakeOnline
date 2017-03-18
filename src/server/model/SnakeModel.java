@@ -1,10 +1,10 @@
-package server;
+package server.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
+
+import server.controller.HandlePlayer;
 
 public class SnakeModel {
 	public static int WIDTH = 200;

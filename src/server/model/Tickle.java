@@ -1,4 +1,4 @@
-package server;
+package server.model;
 
 public class Tickle extends Thread {
 	private int pomme = 0;

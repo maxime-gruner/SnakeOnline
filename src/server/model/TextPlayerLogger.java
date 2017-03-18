@@ -1,4 +1,4 @@
-package server;
+package server.model;
 
 public class TextPlayerLogger implements IPlayerLogger{
 

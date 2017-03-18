@@ -1,4 +1,4 @@
-package server;
+package server.controller;
 
 public interface IOProtocol {
 	public void nameOK();

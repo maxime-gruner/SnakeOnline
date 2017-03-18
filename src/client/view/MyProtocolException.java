@@ -1,5 +1,4 @@
-package controller;
-
+package client.view;
 import java.io.IOException;
 
 public class MyProtocolException extends IOException{

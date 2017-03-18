@@ -1,10 +1,10 @@
-package controller;
+package client.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import server.Player;
-import server.Point;
+import client.model.Player;
+import server.model.Point;
 
 public interface ClientProtocol {
 	public void sendName (String name); // envoie le nom au server en se connectant

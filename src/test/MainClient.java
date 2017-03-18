@@ -1,6 +1,6 @@
 package test;
 
-import model.ClientCore;
+import client.model.ClientCore;
 
 public class MainClient {
 	

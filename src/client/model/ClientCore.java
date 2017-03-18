@@ -1,20 +1,16 @@
-package model;
+package client.model;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,11 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import controller.ClientHandleConnection;
-import server.Player;
-import server.Point;
-import server.Snake;
-import server.SnakeModel;
+import client.controller.ClientHandleConnection;
+import server.model.Point;
+import server.model.SnakeModel;
 
 public class ClientCore extends JFrame{
 
@@ -211,7 +205,7 @@ public class ClientCore extends JFrame{
 	public void fillUserList( ArrayList<Player> playerScore){
 		Collection<String> to_print = new ArrayList<>();
 		for(Player entry : playerScore){
-			to_print.add(entry.getName() +" "+ entry.getScore());
+			to_print.add(entry.getName() +"  "+ entry.getScore());
 		}
 		
 		playerList.setListData(to_print.toArray(new String[0]));

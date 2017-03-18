@@ -1,4 +1,4 @@
-package server;
+package client.model;
 
 public class Player implements Comparable<Player> {
 	Integer score = 0 ;

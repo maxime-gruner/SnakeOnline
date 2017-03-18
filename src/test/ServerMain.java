@@ -1,6 +1,10 @@
-package server;
+package test;
+
+
 
 import java.io.IOException;
+
+import server.model.ServerCore;
 
 public class ServerMain {
 

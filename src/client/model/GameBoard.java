@@ -1,4 +1,4 @@
-package model;
+package client.model;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,8 +12,7 @@ import java.util.Collection;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
-import server.Point;
-import server.SnakeModel;
+import server.model.Point;
 
 public class GameBoard extends JComponent {
 		
@@ -101,7 +100,6 @@ public class GameBoard extends JComponent {
 		repaint();
 	}
 	public void drawMyHead(Point p){
-		System.out.println("drawn in my head: " + p);
 		Graphics g = img.getGraphics();
 		g.setColor(Color.WHITE);
 		g.fillRect(p.getAbs()*scale, p.getOrd()*scale, scale, scale);

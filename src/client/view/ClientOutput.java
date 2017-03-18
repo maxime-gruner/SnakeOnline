@@ -1,8 +1,10 @@
-package controller;
+package client.view;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+
+import client.controller.ClientProtocol;
 
 public class ClientOutput  implements ClientProtocol{
 	

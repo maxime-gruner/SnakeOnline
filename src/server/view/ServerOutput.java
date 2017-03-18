@@ -1,4 +1,4 @@
-package server;
+package server.view;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -6,6 +6,9 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
+
+import server.controller.ServerProtocol;
+import server.model.Point;
 
 public class ServerOutput implements ServerProtocol {
 	PrintWriter os;

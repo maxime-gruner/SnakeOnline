@@ -1,15 +1,14 @@
-package controller;
+package client.view;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
 
-import server.Player;
-import server.Point;
+import client.controller.ClientProtocol;
+import client.model.Player;
+import server.model.Point;
 
 public class ClientInput {
 	
@@ -33,7 +32,6 @@ public class ClientInput {
 		try(BufferedReader is = new BufferedReader(new InputStreamReader(in))){
 			while(!stop){
 				String line = is.readLine();
-				System.out.println("client received: " + line);
 				switch(line){
 				case "NAME OK":
 					handler.nameOK();
@@ -73,7 +71,6 @@ public class ClientInput {
 						
 						Point p = new Point(Integer.valueOf(abs), Integer.valueOf(ord));
 						bodyP.add(p);
-						System.out.println(p);
 					}
 					
 					handler.initSnake(bodyP,name);
@@ -121,6 +118,10 @@ public class ClientInput {
 			}
 		}
 		
+	}
+	
+	public void setStop(){
+		stop = true;
 	}
 	
 

@@ -1,9 +1,11 @@
-package server;
+package server.model;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+
+import server.controller.HandlePlayer;
 
 public class ServerCore extends Thread {
 	private int port;
@@ -32,7 +34,7 @@ public class ServerCore extends Thread {
 				}
 			}
 		} catch (IOException e) {
-			System.out.println("could not bind port " + port);
+			
 		}
 		
 	}

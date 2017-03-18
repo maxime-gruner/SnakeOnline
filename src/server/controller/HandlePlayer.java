@@ -1,9 +1,17 @@
-package server;
+package server.controller;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import server.model.Direction;
+import server.model.IPlayerLogger;
+import server.model.Point;
+import server.model.Snake;
+import server.model.SnakeModel;
+import server.view.ServerInput;
+import server.view.ServerOutput;
 
 public class HandlePlayer implements Runnable, ServerProtocol {
 	private final Socket playerSocket;
@@ -13,7 +21,7 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	private Snake snake;
 	private int score ;
 	private IPlayerLogger logger = null;
-	private boolean stop = false, play=true;
+	private boolean stop = false;
 
 	private enum PlayerState{ ST_INIT, ST_LOGGED }
 	private PlayerState state = PlayerState.ST_INIT;

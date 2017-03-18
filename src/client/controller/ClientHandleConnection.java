@@ -1,19 +1,16 @@
-package controller;
+package client.controller;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
 
-import model.ClientCore;
-import server.Player;
-import server.Point;
+import client.model.ClientCore;
+import client.model.Player;
+import client.view.ClientInput;
+import client.view.ClientOutput;
+import server.model.Point;
 
 public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	

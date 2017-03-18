@@ -1,4 +1,4 @@
-package server;
+package server.model;
 
 public interface IPlayerLogger {
 	public void playerConnected(String ip);

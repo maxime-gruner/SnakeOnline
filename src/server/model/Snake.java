@@ -1,4 +1,4 @@
-package server;
+package server.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -81,7 +81,7 @@ public class Snake {
 	}
 
 
-	public void die() { //ne sers a rien ?
+	public void die() {
 		alive = false;
 	}
 	

@@ -1,7 +1,9 @@
-package server;
+package server.controller;
 
 import java.util.Collection;
 import java.util.TreeMap;
+
+import server.model.Point;
 
 public interface ServerProtocol {
 	default public void onReceiveName(String name){}

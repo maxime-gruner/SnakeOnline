@@ -1,11 +1,12 @@
-package server;
+package server.view;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import controller.MyProtocolException;
+import client.view.MyProtocolException;
+import server.controller.HandlePlayer;
 
 public class ServerInput {
 	HandlePlayer handler;
@@ -21,7 +22,6 @@ public class ServerInput {
 		try(BufferedReader is = new BufferedReader(new InputStreamReader(in))){
 			while(true){
 				String line = is.readLine();
-				System.out.println("Serv received : " + line);
 				switch (line){
 				case "NAME":
 					name = is.readLine();
