@@ -4,17 +4,20 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import model.ClientCore;
+import server.Player;
 import server.Point;
 
 public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	
-	private Map<String, Integer> playerScore = new TreeMap<String, Integer>(); 
+	private ArrayList<Player> playerScore = new ArrayList<>();
 	private Socket sock = null;
 	private ClientOutput cOut;
 	private ClientInput cIn;
@@ -82,8 +85,9 @@ public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	
 
 	@Override
-	public void sendPlist(Map<String, Integer> pList) {
-		playerScore = sortByValue(pList);
+	public void sendPlist(ArrayList<Player> pList) {
+		Collections.sort(playerScore);
+		playerScore = new ArrayList<>(pList);
 		c.fillUserList(playerScore);
 	}
 
@@ -115,7 +119,7 @@ public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	
 	@Override
 	public void die() {
-		finish(); // a changer
+		finish(); 
 	}
 
 	@Override
@@ -126,22 +130,14 @@ public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	
 	@Override
 	public void reclass(String name, Integer score) {
-		int newscore = playerScore.get(name);
-		playerScore.replace(name, newscore+score);
-		c.fillUserList(playerScore);
+		for (Player player : playerScore) {
+			if(player.getName().equals(name)){
+				player.increaseScore(score);
+				Collections.sort(playerScore);
+				c.fillUserList(playerScore);
+				return;
+			}	
+		}
 	}
-
-	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
-	    return map.entrySet()
-	              .stream()
-	              .sorted(Map.Entry.comparingByValue(/*Collections.reverseOrder()*/))
-	              .collect(Collectors.toMap(
-	                Map.Entry::getKey, 
-	                Map.Entry::getValue, 
-	                (e1, e2) -> e1, 
-	                LinkedHashMap::new
-	              ));
-	}
-	
 
 }

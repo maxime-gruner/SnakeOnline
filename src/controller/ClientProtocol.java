@@ -2,9 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
-import java.util.TreeMap;
 
+import server.Player;
 import server.Point;
 
 public interface ClientProtocol {
@@ -12,7 +11,7 @@ public interface ClientProtocol {
 	default public void nameOK(){};
 	default public void nameBad(){};
 	default public void askPList(){};
-	default public void sendPlist(Map<String, Integer> pList){};
+	default public void sendPlist(ArrayList<Player> pList){};
 	default public void initSnake(Collection<Point> bodyP,String name){}	 
 	default public void sendDir(String dir){}
 	default void drawMoveHead(Point head,String name){}

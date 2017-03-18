@@ -25,6 +25,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import controller.ClientHandleConnection;
+import server.Player;
 import server.Point;
 import server.Snake;
 import server.SnakeModel;
@@ -207,18 +208,16 @@ public class ClientCore extends JFrame{
 		this.name = name;
 	}
 
-	public void fillUserList( Map<String,Integer> plist){
+	public void fillUserList( ArrayList<Player> playerScore){
 		Collection<String> to_print = new ArrayList<>();
-		for(Map.Entry<String, Integer> entry : plist.entrySet()){
-			to_print.add(entry.getKey() +" "+ entry.getValue().toString());
+		for(Player entry : playerScore){
+			to_print.add(entry.getName() +" "+ entry.getScore());
 		}
+		
 		playerList.setListData(to_print.toArray(new String[0]));
+		
 	}
 	
-	public void fillUserList(Collection<String> plist){
-		playerList.setListData(plist.toArray(new String[0]));
-	}
-
 	public void acceptName() {
 		connection.askPList();
 

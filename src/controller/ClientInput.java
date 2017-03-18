@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
+import server.Player;
 import server.Point;
 
 public class ClientInput {
@@ -22,7 +23,7 @@ public class ClientInput {
 	}
 	
 	public void doRun() throws IOException{
-		Map<String, Integer> pList;
+		ArrayList<Player> pList;
 		ArrayList<Point> bodyP;
 		String name;
 		String abs;
@@ -41,11 +42,11 @@ public class ClientInput {
 					handler.nameBad();
 					break;
 				case "PLIST":
-					pList = new TreeMap<>();
+					pList = new ArrayList<>();
 					String x;
 					while(!(x = is.readLine()).equals(".")){
 						score = Integer.valueOf(is.readLine());
-						pList.put(x,score);
+						pList.add(new Player(x,score));
 					}
 					handler.sendPlist(pList);
 					break;
