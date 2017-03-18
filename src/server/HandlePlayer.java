@@ -52,7 +52,7 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 			try{
 				playerSocket.close();
 			} catch(IOException e){ e.printStackTrace();}
-			SnakeModel.removePlayer(name); 
+			if(state == PlayerState.ST_LOGGED)SnakeModel.removePlayer(name); 
 			logger.playerDisconnected(playerSocket.toString(), name);
 		}
 	}
@@ -60,8 +60,10 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	@Override
 	public void onReceiveName(String name) {
 		String newName = name;
-		if(SnakeModel.existUserName(name)){
+		if(SnakeModel.existUserName(name) || name.equals("null") || name.length() == 0){
 			nameBad();
+			finish();
+			
 		}else{
 			nameOK();
 			if(state == PlayerState.ST_INIT){

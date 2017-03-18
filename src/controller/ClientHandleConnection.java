@@ -73,6 +73,8 @@ public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	@Override
 	public void nameBad() {
 		finish();
+		cIn.setStop();
+		c.restart();
 		
 	}
 
@@ -119,7 +121,8 @@ public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 	
 	@Override
 	public void die() {
-		finish(); 
+		finish();
+		c.restart();
 	}
 
 	@Override
