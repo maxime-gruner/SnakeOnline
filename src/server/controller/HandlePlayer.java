@@ -105,13 +105,13 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 				snake.move();
 				score ++;
 				SnakeModel.notifyNewMoveHead(snake.getHead(), name,1);
-				SnakeModel.removeApple(snake.getHead());
+				SnakeModel.removeApple(snake.getHead(), -1);
 				break;
 			case -2 :// mange pomme donc grow
 				snake.move();
 				score ++;
 				SnakeModel.notifyNewMoveHead(snake.getHead(), name,1);
-				SnakeModel.removeApple(snake.getHead());
+				SnakeModel.removeApple(snake.getHead(), -2);
 				SnakeModel.changeSpeed();
 				break;
 				

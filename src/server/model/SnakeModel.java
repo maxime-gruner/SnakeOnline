@@ -104,11 +104,9 @@ public class SnakeModel {
 			return 1;
 		}
 		if(map[toTest.getOrd()][toTest.getAbs()] == -1 ){
-			appleList.removeApple(toTest);
 			return -1;
 		}
 		if(map[toTest.getOrd()][toTest.getAbs()] == -2 ){
-			appleList.removeApple(toTest);
 			return -2;
 		}
 		return 0;
@@ -145,9 +143,9 @@ public class SnakeModel {
 	}
 
 
-	public static synchronized void removeApple(Point apple) {
+	public static synchronized void removeApple(Point apple, int which) {
 		
-		int n = appleList.removeApple(apple);
+		int n = appleList.removeApple(apple,which);
 		if(n != -1){
 			appleList.removeIndexApple(n);
 		}
