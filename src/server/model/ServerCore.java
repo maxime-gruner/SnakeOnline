@@ -24,7 +24,6 @@ public class ServerCore extends Thread {
 		try(ServerSocket serverSocket = new ServerSocket(port)){
 			serverSocket.setSoTimeout(1000);
 			SnakeModel.initMap();
-			new Tickle().start();
 			while(!stop){
 				try{
 					Socket playerSocket = serverSocket.accept();

@@ -10,6 +10,7 @@ import server.model.IPlayerLogger;
 import server.model.Point;
 import server.model.Snake;
 import server.model.SnakeModel;
+import server.model.Tickle;
 import server.view.ServerInput;
 import server.view.ServerOutput;
 
@@ -105,6 +106,13 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 				score ++;
 				SnakeModel.notifyNewMoveHead(snake.getHead(), name,1);
 				SnakeModel.removeApple(snake.getHead());
+				break;
+			case -2 :// mange pomme donc grow
+				snake.move();
+				score ++;
+				SnakeModel.notifyNewMoveHead(snake.getHead(), name,1);
+				SnakeModel.removeApple(snake.getHead());
+				SnakeModel.changeSpeed();
 				break;
 				
 			}
@@ -210,6 +218,11 @@ public class HandlePlayer implements Runnable, ServerProtocol {
 	@Override
 	public void newApple(Point p) {
 		pOut.newApple(p);
+	}
+
+	@Override
+	public void newSpeedApple(Point p) {
+		pOut.newSpeedApple(p);
 	}
 
 	@Override

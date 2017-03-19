@@ -10,6 +10,7 @@ public class SnakeModel {
 	public static int WIDTH = 200;
 	public static int HEIGHT = 200;
 	static int map[][]= new int[HEIGHT][WIDTH];
+	private static Tickle tickle;
 	
 	
 	
@@ -27,6 +28,8 @@ public class SnakeModel {
 			map[HEIGHT-1][i] = 999;
 		}
 		appleList=new Apple();
+		tickle = new Tickle();
+		tickle.start();
 	}
 	
 	
@@ -104,6 +107,10 @@ public class SnakeModel {
 			appleList.removeApple(toTest);
 			return -1;
 		}
+		if(map[toTest.getOrd()][toTest.getAbs()] == -2 ){
+			appleList.removeApple(toTest);
+			return -2;
+		}
 		return 0;
 		
 	}
@@ -117,10 +124,20 @@ public class SnakeModel {
 	public static synchronized void addApple(){
 		appleList.addApple(Point.randomCoord());
 	}
+
+	public static synchronized void addSpeedApple(){
+		appleList.addSpeedApple(Point.randomCoord());
+	}
 	
 	public static synchronized void notifyNewApple(Point a){
 		playerList.values().forEach(c -> c.newApple(a));
 		map[a.getOrd()][a.getAbs()] = -1;
+	}
+	
+
+	public static synchronized void notifyNewSpeedApple(Point a){
+		playerList.values().forEach(c -> c.newSpeedApple(a));
+		map[a.getOrd()][a.getAbs()] = -2;
 	}
 	
 	public static synchronized ArrayList<Point> getAllApple(){
@@ -134,6 +151,12 @@ public class SnakeModel {
 		if(n != -1){
 			appleList.removeIndexApple(n);
 		}
+		
+	}
+
+
+	public static void changeSpeed() {
+		tickle.setTime(10);
 		
 	}
 	

@@ -112,6 +112,11 @@ public class ClientInput {
 					ord=is.readLine();
 					handler.drawApple(new Point(Integer.valueOf(abs), Integer.valueOf(ord)));
 					break;
+				case "SPEED APPLE":
+					abs=is.readLine();
+					ord=is.readLine();
+					handler.drawSpeedApple(new Point(Integer.valueOf(abs), Integer.valueOf(ord)));
+					break;
 				default:
 					throw new MyProtocolException("Invalid input on client: " + line);
 				}

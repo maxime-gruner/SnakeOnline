@@ -111,6 +111,14 @@ public class ServerOutput implements ServerProtocol {
 
 
 	@Override
+	public void newSpeedApple(Point p) {
+		os.println("SPEED APPLE");
+		os.println(p.getAbs());
+		os.println(p.getOrd());
+	}
+
+
+	@Override
 	public void sendScore(String name, int point) {
 		os.println("SCORE");
 		os.println(name);

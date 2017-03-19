@@ -19,5 +19,6 @@ public interface ClientProtocol {
 	default public void eraseSnake(ArrayList<Point> bodyP){}
 	default public void die(){}
 	default public void drawApple(Point a){}
+	default public void drawSpeedApple(Point a){}
 	default public void reclass(String name, Integer score){}
 }

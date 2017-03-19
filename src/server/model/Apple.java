@@ -5,16 +5,28 @@ import java.util.ArrayList;
 public class Apple {
 	
 	private ArrayList<Point> appleList;
+	int nbApple;
 	
 	public Apple(){
 		this.appleList=  new ArrayList<Point>();
+		nbApple=0;
 	}
 	
 	public synchronized void addApple (Point p){
-		if(appleList.contains(p)) return;
+		if(appleList.contains(p) || (nbApple>=200)) return;
 		appleList.add(p);
 		SnakeModel.notifyNewApple(p);
+		nbApple++;
 	}
+	
+	
+	public synchronized void addSpeedApple (Point p){
+		if(appleList.contains(p) || (nbApple>=200)) return;
+		appleList.add(p);
+		SnakeModel.notifyNewSpeedApple(p);
+		nbApple++;
+	}
+	
 	
 	public synchronized int removeApple(Point p){
 		int toDelete = 0;
@@ -26,8 +38,9 @@ public class Apple {
 				
 			}
 			
-			
 		}
+		nbApple--;
+		
 		return -1;
 		
 }

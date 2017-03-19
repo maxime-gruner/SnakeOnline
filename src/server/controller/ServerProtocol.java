@@ -24,5 +24,6 @@ public interface ServerProtocol {
 	default public void snakeDie(){}
 	default public void cleanSnake(Collection<Point> bodySnake){}
 	default public void newApple(Point p){}
+	default public void newSpeedApple(Point p){}
 	default public void sendScore(String name, int point){}
 }

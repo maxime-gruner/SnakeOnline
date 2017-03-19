@@ -163,4 +163,12 @@ public class GameBoard extends JComponent {
 		g.fillRect(p.getAbs()*scale, p.getOrd()*scale, scale, scale);
 		repaint();
 	}
+	
+
+	public void drawSpeedApple(Point p){
+		Graphics g = img.getGraphics();
+		g.setColor(Color.BLUE);
+		g.fillRect(p.getAbs()*scale, p.getOrd()*scale, scale, scale);
+		repaint();
+	}
 }

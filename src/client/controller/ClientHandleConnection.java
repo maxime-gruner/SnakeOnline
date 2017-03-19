@@ -129,6 +129,11 @@ public class ClientHandleConnection extends Thread implements  ClientProtocol  {
 
 	
 	@Override
+	public void drawSpeedApple(Point a) {
+		c.drawSpeedApple(a);
+	}
+
+	@Override
 	public void reclass(String name, Integer score) {
 		for (Player player : playerScore) {
 			if(player.getName().equals(name)){

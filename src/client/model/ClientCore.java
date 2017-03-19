@@ -245,7 +245,10 @@ public class ClientCore extends JFrame{
 	public void drawApple(Point a){
 		gameBoard.drawApple(a);
 	}
-	
+
+	public void drawSpeedApple(Point a){
+		gameBoard.drawSpeedApple(a);
+	}
 	
 	public void restart(){
 		
